@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class TaxiFacade {
-    fun register(request: TaxiDto.RegisterRequest): TaxiDto.RegisterResponse {
+    fun register(request: TaxiDto.RegisterRequest): Long {
         TODO("Not yet implemented")
     }
 }

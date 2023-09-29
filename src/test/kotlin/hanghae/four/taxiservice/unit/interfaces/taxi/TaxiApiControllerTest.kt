@@ -29,12 +29,13 @@ class TaxiApiControllerTest {
     @MockkBean
     private lateinit var taxiFacade: TaxiFacade
 
+    private val taxiId = 1L
+
     @Test
     fun `택시 등록`() {
         val request = TaxiDto.RegisterRequest(type = Taxi.Type.NORMAL, 1L, 1234)
-        val result = TaxiDto.RegisterResponse(1L)
 
-        every { taxiFacade.register(request) } returns result
+        every { taxiFacade.register(request) } returns taxiId
 
         mockMvc.perform(
             post("/taxis")
@@ -43,6 +44,6 @@ class TaxiApiControllerTest {
         )
             .andDo(print())
             .andExpect(status().isCreated)
-            .andExpect(jsonPath("$.taxiId").value(result.taxiId))
+            .andExpect(jsonPath("$.taxiId").value(taxiId))
     }
 }
