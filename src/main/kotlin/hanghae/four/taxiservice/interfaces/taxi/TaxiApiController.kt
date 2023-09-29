@@ -16,7 +16,7 @@ class TaxiApiController(
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/taxis")
     fun register(@Valid @RequestBody request: TaxiDto.RegisterRequest): TaxiDto.RegisterResponse {
-        val taxiId = taxiFacade.register(request)
+        val taxiId = taxiFacade.register(request.toTaxiCommand())
         return TaxiDto.RegisterResponse(taxiId = taxiId)
     }
 }

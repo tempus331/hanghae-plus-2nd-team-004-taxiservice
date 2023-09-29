@@ -1,13 +1,15 @@
 package hanghae.four.taxiservice.domain.taxi
 
-import hanghae.four.taxiservice.interfaces.taxi.TaxiDto
 import org.springframework.stereotype.Service
 
 @Service
 class TaxiService(
     private val taxiStore: TaxiStore
 ) {
-    fun register(request: TaxiDto.RegisterRequest): Long {
-        return 1L;
+    fun register(request: TaxiCommand.RegisterTaxi): Long {
+        val taxi = request.toEntity()
+
+        val saveTaxi = taxiStore.store(taxi)
+        return requireNotNull(saveTaxi.id)
     }
 }
