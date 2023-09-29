@@ -46,4 +46,19 @@ class TaxiApiControllerTest {
             .andExpect(status().isCreated)
             .andExpect(jsonPath("$.taxiId").value(taxiId))
     }
+
+    @Test
+    fun `택시 등록시 택시 종류가 null 입력하면 에러`() {
+        val request = TaxiDto.RegisterRequest(type = null, 1L, 1234)
+
+        every { taxiFacade.register(request) } returns taxiId
+
+        mockMvc.perform(
+            post("/taxis")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request))
+        )
+            .andDo(print())
+            .andExpect(status().isBadRequest)
+    }
 }
