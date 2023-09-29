@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
 
 @RestController
 class TaxiApiController(
@@ -14,7 +15,7 @@ class TaxiApiController(
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/taxis")
-    fun register(@RequestBody request: TaxiDto.RegisterRequest): TaxiDto.RegisterResponse {
+    fun register(@Valid @RequestBody request: TaxiDto.RegisterRequest): TaxiDto.RegisterResponse {
         val taxiId = taxiFacade.register(request)
         return TaxiDto.RegisterResponse(taxiId = taxiId)
     }
