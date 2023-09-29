@@ -8,6 +8,6 @@ class TaxiService(
     private val taxiStore: TaxiStore
 ) {
     fun register(request: TaxiDto.RegisterRequest): Long {
-        TODO("Not yet implemented")
+        return 1L;
     }
 }
