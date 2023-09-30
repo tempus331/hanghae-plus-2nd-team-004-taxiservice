@@ -13,7 +13,7 @@ class Taxi(
     @Enumerated(EnumType.STRING)
     val type: Type,
 
-    @Column(name = "number", nullable = false)
+    @Column(name = "number", nullable = false, unique = true)
     val number: Int,
 
     @Column(name = "status", nullable = false)
