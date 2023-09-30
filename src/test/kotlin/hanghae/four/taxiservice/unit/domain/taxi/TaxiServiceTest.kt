@@ -4,7 +4,7 @@ import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiCommand
 import hanghae.four.taxiservice.domain.taxi.TaxiService
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
-import hanghae.four.taxiservice.infrastructures.taxi.FakeTaxiStore
+import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiStore
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.infrastructures.taxi
+package hanghae.four.taxiservice.unit.infrastructures.taxi
 
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiStore

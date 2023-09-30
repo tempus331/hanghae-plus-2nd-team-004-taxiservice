@@ -5,8 +5,11 @@ import hanghae.four.taxiservice.domain.taxi.TaxiStore
 import org.springframework.stereotype.Repository
 
 @Repository
-class TaxiStoreImpl() : TaxiStore {
+class TaxiStoreImpl(
+    private val taxiRepository: TaxiRepository
+) : TaxiStore {
+
     override fun store(taxi: Taxi): Taxi {
-        TODO("Not yet implemented")
+        return taxiRepository.save(taxi)
     }
 }
