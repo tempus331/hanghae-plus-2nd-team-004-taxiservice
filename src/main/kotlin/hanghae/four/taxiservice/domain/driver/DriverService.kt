@@ -7,6 +7,7 @@ class DriverService(
     private val driverReader: DriverReader
 ) {
     fun getDriver(driverId: Long): DriverInfo.Main {
-        return DriverInfo.Main(id = 1L)
+        val driver = driverReader.getDriver(driverId)
+        return DriverInfo.Main(requireNotNull(driver.id))
     }
 }
