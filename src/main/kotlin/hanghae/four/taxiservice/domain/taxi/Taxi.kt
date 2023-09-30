@@ -24,6 +24,12 @@ class Taxi(
     val id: Long? = null
 ) {
 
+    init {
+        if (number <= 0) {
+            throw IllegalArgumentException("택시 번호는 0 또는 음수가 될수 없습니다.")
+        }
+    }
+
     enum class Type(
         private val description: String
     ) {
