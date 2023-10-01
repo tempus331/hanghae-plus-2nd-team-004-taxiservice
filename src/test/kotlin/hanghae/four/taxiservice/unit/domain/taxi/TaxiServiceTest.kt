@@ -29,7 +29,7 @@ internal class TaxiServiceTest {
 
     @Test
     fun `택시 등록`() {
-        val request = TaxiCommand.RegisterTaxi(1L, type = Taxi.Type.NORMAL, 1234)
+        val request = RegisterTaxi(1L, type = Taxi.Type.NORMAL, 1234)
         val taxiId = taxiService.register(request)
 
         assertThat(taxiId).isEqualTo(1L)
@@ -37,7 +37,7 @@ internal class TaxiServiceTest {
 
     @Test
     fun `택시기사가 존재하지 않다면 에러`() {
-        val request = TaxiCommand.RegisterTaxi(2L, type = Taxi.Type.NORMAL, 1234)
+        val request = RegisterTaxi(2L, type = Taxi.Type.NORMAL, 1234)
 
         assertThatThrownBy{taxiService.register(request)}
             .isInstanceOf(java.lang.IllegalArgumentException::class.java)
@@ -47,7 +47,7 @@ internal class TaxiServiceTest {
     fun `택시번호 중복시 에러`() {
         taxiStore.store(Taxi(1L, Taxi.Type.NORMAL, 1234, Taxi.Status.CLOSED))
 
-        val request = TaxiCommand.RegisterTaxi(1L, type = Taxi.Type.NORMAL, 1234)
+        val request = RegisterTaxi(1L, type = Taxi.Type.NORMAL, 1234)
 
         assertThatThrownBy{taxiService.register(request)}
             .isInstanceOf(EntityExistsException::class.java)

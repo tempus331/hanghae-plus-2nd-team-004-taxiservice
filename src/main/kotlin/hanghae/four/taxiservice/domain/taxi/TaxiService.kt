@@ -10,7 +10,7 @@ class TaxiService(
     private val taxiStore: TaxiStore,
     private val taxiReader: TaxiReader
 ) {
-    fun register(request: TaxiCommand.RegisterTaxi): Long {
+    fun register(request: RegisterTaxi): Long {
         driverReader.getDriver(request.driverId)
 
         if (taxiReader.existsBy(request.number)) {
