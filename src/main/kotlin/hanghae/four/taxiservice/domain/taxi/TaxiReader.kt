@@ -1,8 +1,8 @@
 package hanghae.four.taxiservice.domain.taxi
 
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 
-@Component
+@Repository
 interface TaxiReader {
-    fun getAllNotRunningTaxiAndType(type: String): List<Taxi>
+    fun existsBy(number: Int): Boolean
 }
