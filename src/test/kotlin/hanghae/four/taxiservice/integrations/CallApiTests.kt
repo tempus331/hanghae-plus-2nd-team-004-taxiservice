@@ -15,7 +15,9 @@ class CallApiTests : AbstractIntegrationTests() {
     @Test
     fun `유효한 데이터로 배차 요청을 진행하면 200응답을 반환한다`() {
         val mockRequest = CallRequest(
-            taxiId = 1L,
+            type = "NORMAL",
+            origin = "서울시 강남구",
+            destination = "서울시 강북구",
             userId = 1L,
         )
 
