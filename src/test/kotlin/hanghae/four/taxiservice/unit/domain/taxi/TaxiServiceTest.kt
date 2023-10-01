@@ -1,6 +1,8 @@
 package hanghae.four.taxiservice.unit.domain.taxi
 
+import hanghae.four.taxiservice.domain.driver.DriverReader
 import hanghae.four.taxiservice.domain.taxi.*
+import hanghae.four.taxiservice.unit.infrastructures.driver.FakeDriverRepository
 import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -15,11 +17,14 @@ internal class TaxiServiceTest {
 
     private lateinit var taxiReader: TaxiReader
 
+    private lateinit var driverReader: DriverReader
+
     @BeforeEach
     fun setup() {
         taxiStore = FakeTaxiRepository()
         taxiReader = taxiStore as FakeTaxiRepository
-        taxiService = TaxiService(taxiStore, taxiReader)
+        driverReader = FakeDriverRepository()
+        taxiService = TaxiService(driverReader, taxiStore, taxiReader)
     }
 
     @Test
@@ -28,6 +33,14 @@ internal class TaxiServiceTest {
         val taxiId = taxiService.register(request)
 
         assertThat(taxiId).isEqualTo(1L)
+    }
+
+    @Test
+    fun `택시기사가 존재하지 않다면 에러`() {
+        val request = TaxiCommand.RegisterTaxi(2L, type = Taxi.Type.NORMAL, 1234)
+
+        assertThatThrownBy{taxiService.register(request)}
+            .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 
     @Test

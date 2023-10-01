@@ -1,5 +1,6 @@
 package hanghae.four.taxiservice.unit.domain.driver
 
+import hanghae.four.taxiservice.domain.driver.DriverReader
 import hanghae.four.taxiservice.domain.driver.DriverService
 import hanghae.four.taxiservice.unit.infrastructures.driver.FakeDriverRepository
 import org.assertj.core.api.Assertions.assertThat
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.Test
 internal class DriverServiceTest {
     private lateinit var driverService: DriverService
 
-    private lateinit var driverReader: FakeDriverRepository
+    private lateinit var driverReader: DriverReader
 
     @BeforeEach
     fun setup() {
