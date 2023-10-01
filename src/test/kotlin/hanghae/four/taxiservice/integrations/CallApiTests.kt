@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.post
 class CallApiTests : AbstractIntegrationTests() {
 
     @Test
-    fun `배차 요청을 한다`() {
+    fun `유효한 데이터로 배차 요청을 진행하면 200응답을 반환한다`() {
         val mockRequest = CallRequest(
             taxiId = 1L,
             userId = 1L,
