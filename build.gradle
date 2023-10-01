@@ -24,9 +24,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'com.ninja-squad:springmockk:3.0.1'
+
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	testImplementation 'io.mockk:mockk:1.12.4'
+
+	testImplementation 'io.rest-assured:rest-assured'
 }
 
 tasks.withType(KotlinCompile) {

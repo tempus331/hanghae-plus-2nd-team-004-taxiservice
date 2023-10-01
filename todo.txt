@@ -1,0 +1,41 @@
+승객
+  - id, password, accountInfo, cardInfo
+기사
+  - id, password, licenseNumber, grade, provider(FK)
+택시
+  - type, drivingStatus, driver(FK), registrationDate, registrationNumber, vehicleInfomation
+결제 정보
+  - (Payment_Information)
+    client(FK), taxi or driver(FK), paymentDate, status, fare, callUsage(FK), provider(FK)
+장소
+  - city, county, latitude, longitude, placeName
+이용 내역
+  -  date, taxi(FK), client(FK) ,departureTime, arravalTime, startingPoint, endPoint, amount, taxiType(FK X)
+상호
+  - name, presidentName, registrationNumber, phoneNumber, address
+
+
+Interfaces (controller) Client
+  - order
+    order controller
+Facade
+  - order
+  - notification
+Domain
+  - order
+    service
+     - pay validator
+     - pay processor
+     - order processor
+     - order store (commander)
+        -> store.save()
+  - notification
+    service
+      - notification processor
+      - notification validator
+Infrastructure
+  order
+   -> storeimpl (commander)
+      -> repository
+   -> readerimpl (query)
+      ->
