@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.uniitests.interfaces.taxi.call
+package hanghae.four.taxiservice.unit
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.BeforeEach

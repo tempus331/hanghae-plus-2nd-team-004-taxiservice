@@ -14,15 +14,7 @@ class CallApiController(
 
     @PostMapping("/api/v1/call")
     fun callTaxi(@RequestBody callRequest: CallRequest): ResponseEntity<CallResponse> {
-
         val callResult = callFacade.call(callMapper.mapToCallCommand(callRequest))
-        val res = callMapper.mapToResponse(callResult)
-
-        val mockResponse = CallResponse(
-            driverInfo = DriverInfo(name = "tester driver"),
-            taxiInfo = TaxiInfo(taxiType = "NORMAL", taxiNumber = "123가1234"),
-        )
-
-        return ResponseEntity.ok(mockResponse)
+        return ResponseEntity.ok(callMapper.mapToResponse(callResult))
     }
 }

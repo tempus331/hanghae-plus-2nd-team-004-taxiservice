@@ -1,6 +1,7 @@
 package hanghae.four.taxiservice.integrations
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import hanghae.four.taxiservice.util.db.DatabaseCleanup
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,6 +19,11 @@ abstract class AbstractIntegrationTests {
     @Autowired
     protected lateinit var objectMapper: ObjectMapper
 
+    @Autowired
+    private lateinit var dbCleanser: DatabaseCleanup
+
+    @Autowired
+    private lateinit var dbPreparer: DatabasePreparer
 
     @BeforeEach
     fun setUp(webApplicationContext: WebApplicationContext) {
@@ -25,5 +31,8 @@ abstract class AbstractIntegrationTests {
             .addFilter<DefaultMockMvcBuilder>(CharacterEncodingFilter("UTF-8"))
             .alwaysDo<DefaultMockMvcBuilder>(MockMvcResultHandlers.print())
             .build()
+
+        dbCleanser.execute()
+        dbPreparer.execute()
     }
 }

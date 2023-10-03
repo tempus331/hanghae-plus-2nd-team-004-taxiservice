@@ -1,13 +1,6 @@
 package hanghae.four.taxiservice.interfaces.taxi.call
 
-data class DriverInfo(
-    val name: String,
-)
-
-data class TaxiInfo(
-    val taxiNumber: String,
-    val taxiType: String,
-)
+import hanghae.four.taxiservice.domain.driver.DriverInfo
 
 data class CallRequest(
     val origin: String,
@@ -17,7 +10,16 @@ data class CallRequest(
 )
 
 data class CallResponse(
-    val driverInfo: DriverInfo,
-    val taxiInfo: TaxiInfo,
+    val callNumber: String,
+    val driverData: DriverData,
+    val taxiData: TaxiData,
 )
 
+data class DriverData(
+    val name: String,
+    val phoneNumber: String,
+)
+
+data class TaxiData(
+    val taxiNumber: Int,
+)
