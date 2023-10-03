@@ -23,7 +23,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
     private lateinit var clientRepository: ClientRepository
 
     @Test
-    fun `택시 결제하기`() {
+    fun `택시 현금 결제하기`() {
         // 기사/사용자 등록 -> 택시등록 -> 택시 호출 -> 결제
         val client = clientRepository.save(Client())
 
@@ -32,7 +32,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         val taxiResponse = TaxiSteps.`택시 등록`(Taxi.Type.NORMAL, requireNotNull(driver.id), 1234)
         val taxiId = taxiResponse.jsonPath().getLong("taxiId")
 
-        val response = PaymentSteps.`택시 요금 현금 결제`(requireNotNull(client.id), taxiId, BigDecimal(1000), Payment.Type.CASH, null)
+        val response = PaymentSteps.`택시 요금 결제`(requireNotNull(client.id), taxiId, BigDecimal(1000), Payment.Type.CASH, null)
 
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
         Assertions.assertThat(response.jsonPath().getLong("paymentId")).isEqualTo(1L)

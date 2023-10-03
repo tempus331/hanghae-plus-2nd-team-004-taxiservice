@@ -10,7 +10,7 @@ import java.math.BigDecimal
 class PaymentSteps : AcceptanceTestSteps() {
 
     companion object {
-        fun `택시 요금 현금 결제`(
+        fun `택시 요금 결제`(
             clientId: Long,
             taxiId: Long,
             amount: BigDecimal,
