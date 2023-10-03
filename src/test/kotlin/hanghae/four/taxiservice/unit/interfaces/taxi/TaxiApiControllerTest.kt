@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import hanghae.four.taxiservice.applications.taxi.TaxiFacade
 import hanghae.four.taxiservice.domain.taxi.Taxi
+import hanghae.four.taxiservice.interfaces.taxi.RegisterRequest
 import hanghae.four.taxiservice.interfaces.taxi.TaxiApiController
-import hanghae.four.taxiservice.interfaces.taxi.TaxiDto
 import io.mockk.every
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,7 +33,7 @@ class TaxiApiControllerTest {
 
     @Test
     fun `택시 등록`() {
-        val request = TaxiDto.RegisterRequest(type = Taxi.Type.NORMAL, 1L, 1234)
+        val request = RegisterRequest(type = Taxi.Type.NORMAL, 1L, 1234)
 
         every { taxiFacade.register(request.toTaxiCommand()) } returns taxiId
 
@@ -49,7 +49,7 @@ class TaxiApiControllerTest {
 
     @Test
     fun `택시 등록시 택시 종류가 null 입력하면 에러`() {
-        val request = TaxiDto.RegisterRequest(type = null, 1L, 1234)
+        val request = RegisterRequest(type = null, 1L, 1234)
 
         mockMvc.perform(
             post("/taxis")

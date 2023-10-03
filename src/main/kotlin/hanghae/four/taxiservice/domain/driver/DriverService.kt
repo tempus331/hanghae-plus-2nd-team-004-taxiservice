@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service
 class DriverService(
     private val driverReader: DriverReader
 ) {
-    fun getDriver(driverId: Long): DriverInfo.Main {
+    fun getDriver(driverId: Long): DriverInfo {
         val driver = driverReader.getDriver(driverId)
-        return DriverInfo.Main(requireNotNull(driver.id))
+        return DriverInfo(requireNotNull(driver.id))
     }
 }
