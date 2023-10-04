@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.acceptance
+package hanghae.four.taxiservice.util.db
 
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired

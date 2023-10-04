@@ -31,4 +31,8 @@ class FakeTaxiRepository : TaxiStore, TaxiReader {
     override fun existsBy(number: Int): Boolean {
         return taxis.any { it.number == number }
     }
+
+    override fun findAllNotRunningTaxisByType(type: String): List<Taxi> {
+        return taxis.filter { it.type.name == type && it.status != Taxi.Status.RUNNING }
+    }
 }

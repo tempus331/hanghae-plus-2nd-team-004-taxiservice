@@ -24,6 +24,7 @@ class Taxi(
     val number: Int,
 
     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     val status: Status,
 
     @Id
@@ -35,6 +36,16 @@ class Taxi(
         if (number <= 0) {
             throw IllegalArgumentException("택시 번호는 0 또는 음수가 될수 없습니다.")
         }
+    }
+
+    fun departToCustomer(): Taxi {
+        return Taxi(
+            driverId = this.driverId,
+            type = this.type,
+            number = this.number,
+            status = Status.ON_WAY_TO_CUSTOMER,
+            id = this.id
+        )
     }
 
     enum class Type(
@@ -51,6 +62,7 @@ class Taxi(
         CLOSED("미운행"),
         WAITING("대기중"),
         RUNNING("운행중"),
+        ON_WAY_TO_CUSTOMER("고객에게 가는중"),
         COMPLETE("완료"),
     }
 }
