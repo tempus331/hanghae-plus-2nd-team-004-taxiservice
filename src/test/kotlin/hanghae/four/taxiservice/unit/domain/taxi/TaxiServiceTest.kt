@@ -1,7 +1,11 @@
 package hanghae.four.taxiservice.unit.domain.taxi
 
 import hanghae.four.taxiservice.domain.driver.DriverReader
-import hanghae.four.taxiservice.domain.taxi.*
+import hanghae.four.taxiservice.domain.taxi.RegisterTaxi
+import hanghae.four.taxiservice.domain.taxi.Taxi
+import hanghae.four.taxiservice.domain.taxi.TaxiReader
+import hanghae.four.taxiservice.domain.taxi.TaxiService
+import hanghae.four.taxiservice.domain.taxi.TaxiStore
 import hanghae.four.taxiservice.unit.infrastructures.driver.FakeDriverRepository
 import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
 import org.assertj.core.api.Assertions.assertThat
@@ -39,7 +43,7 @@ internal class TaxiServiceTest {
     fun `택시기사가 존재하지 않다면 에러`() {
         val request = RegisterTaxi(2L, type = Taxi.Type.NORMAL, 1234)
 
-        assertThatThrownBy{taxiService.register(request)}
+        assertThatThrownBy { taxiService.register(request) }
             .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 
@@ -49,7 +53,7 @@ internal class TaxiServiceTest {
 
         val request = RegisterTaxi(1L, type = Taxi.Type.NORMAL, 1234)
 
-        assertThatThrownBy{taxiService.register(request)}
+        assertThatThrownBy { taxiService.register(request) }
             .isInstanceOf(EntityExistsException::class.java)
             .hasMessage("중복된 택시 번호가 있습니다.")
     }

@@ -1,6 +1,13 @@
 package hanghae.four.taxiservice.domain.taxi
 
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
 @Table(name = "taxi")
@@ -21,8 +28,8 @@ class Taxi(
     val status: Status,
 
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
-    val id: Long? = null
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
 ) {
 
     init {
@@ -42,20 +49,20 @@ class Taxi(
     }
 
     enum class Type(
-        private val description: String
+        private val description: String,
     ) {
         NORMAL("일반"),
         DELUXE("모범"),
-        HIGH("고급")
+        HIGH("고급"),
     }
 
     enum class Status(
-        private val description: String
+        private val description: String,
     ) {
         CLOSED("미운행"),
         WAITING("대기중"),
         RUNNING("운행중"),
         ON_WAY_TO_CUSTOMER("고객에게 가는중"),
-        COMPLETE("완료")
+        COMPLETE("완료"),
     }
 }
