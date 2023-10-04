@@ -1,5 +1,6 @@
 package hanghae.four.taxiservice.acceptance
 
+import hanghae.four.taxiservice.util.db.DatabaseCleanup
 import io.restassured.RestAssured
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired

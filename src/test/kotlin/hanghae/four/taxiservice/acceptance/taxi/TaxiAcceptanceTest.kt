@@ -17,7 +17,7 @@ class TaxiAcceptanceTest : AcceptanceTest() {
     @Test
     fun `택시 등록을 한다`() {
         // 택시기사 등록 임시 추가, 나중에 수정해야함
-        driverRepository.save(Driver())
+        driverRepository.save(Driver(name = "기사1", phoneNumber = "010-1234-5678", licenseNumber = "12345678901234567890"))
 
         val response = TaxiSteps.`택시 등록`(Taxi.Type.NORMAL, 1L, 1234)
 
