@@ -31,7 +31,13 @@ class PaymentApiControllerTest {
 
     @Test
     fun `택시 현금 결제 성공`() {
-        val request = PayRequest(clientId = 1L, taxiId = 1L, amount = BigDecimal(1000), payType = Payment.Type.CASH, pgType = null)
+        val request = PayRequest(
+            clientId = 1L,
+            callId = 1L,
+            amount = BigDecimal(1000),
+            payType = Payment.Type.CASH,
+            pgType = null
+        )
 
         val paymentId = 1L
 
