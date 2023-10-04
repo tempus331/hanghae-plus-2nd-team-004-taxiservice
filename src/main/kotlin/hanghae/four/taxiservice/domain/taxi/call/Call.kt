@@ -1,13 +1,19 @@
 package hanghae.four.taxiservice.domain.taxi.call
 
 import java.time.LocalDateTime
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.Table
 
 /**
  * TODO: 2023.10.03
  * - aggregate root를 정하고 연관관계 맵핑하기
  */
-
 
 @Entity
 @Table(name = "call")
@@ -44,7 +50,7 @@ class Call(
     }
 
     enum class CallStatus(
-        private val description: String
+        private val description: String,
     ) {
         WAITING("기사 응답 대기중"),
         RUNNING("수락 완료"),

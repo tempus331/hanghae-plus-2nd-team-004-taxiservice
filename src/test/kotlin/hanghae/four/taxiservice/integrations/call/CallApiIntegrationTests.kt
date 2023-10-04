@@ -14,17 +14,16 @@ import org.springframework.test.web.servlet.post
 @SpringBootTest
 class CallApiIntegrationTests(
     @Autowired
-    private val callRepository: CallRepository
+    private val callRepository: CallRepository,
 ) : AbstractIntegrationTests() {
 
     @Test
     fun `유효한 데이터로 배차 요청을 진행하면 200응답을 반환한다`() {
-
         val mockRequest = CallRequest(
             type = "NORMAL",
             origin = "서울시 강남구",
             destination = "서울시 강북구",
-            userId = 1L,
+            userId = 1L
         )
 
         mockMvc.post("/api/v1/call") {

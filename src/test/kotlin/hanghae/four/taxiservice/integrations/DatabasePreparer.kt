@@ -27,12 +27,18 @@ class DatabasePreparer {
     }
 
     private fun prepareTaxis() {
-        NORMAL_WAITING_STATUS_TAXI = taxiRepository.save(Taxi(driverId = TEST_DRIVER.id!!, type = Taxi.Type.NORMAL, number = 12, status = Taxi.Status.WAITING))
-        DELUXE_WAITING_STATUS_TAXI = taxiRepository.save(Taxi(driverId = TEST_DRIVER_02.id!!, type = Taxi.Type.NORMAL, number = 13, status = Taxi.Status.WAITING))
+        NORMAL_WAITING_STATUS_TAXI = taxiRepository.save(
+            Taxi(driverId = TEST_DRIVER.id!!, type = Taxi.Type.NORMAL, number = 12, status = Taxi.Status.WAITING)
+        )
+        DELUXE_WAITING_STATUS_TAXI = taxiRepository.save(
+            Taxi(driverId = TEST_DRIVER_02.id!!, type = Taxi.Type.NORMAL, number = 13, status = Taxi.Status.WAITING)
+        )
     }
 
     private fun prepareDrivers() {
         TEST_DRIVER = driveRepository.save(Driver(name = "홍길동", phoneNumber = "010-1234-5678", licenseNumber = "1234"))
-        TEST_DRIVER_02 = driveRepository.save(Driver(name = "가나다", phoneNumber = "010-5431-5678", licenseNumber = "1234-002"))
+        TEST_DRIVER_02 = driveRepository.save(
+            Driver(name = "가나다", phoneNumber = "010-5431-5678", licenseNumber = "1234-002")
+        )
     }
 }

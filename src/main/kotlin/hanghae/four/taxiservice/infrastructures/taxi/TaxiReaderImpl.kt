@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class TaxiReaderImpl(
-    private val taxiRepository: TaxiRepository
+    private val taxiRepository: TaxiRepository,
 ) : TaxiReader {
 
     override fun existsBy(number: Int): Boolean {

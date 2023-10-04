@@ -8,7 +8,7 @@ import javax.persistence.EntityExistsException
 class TaxiService(
     private val driverReader: DriverReader,
     private val taxiStore: TaxiStore,
-    private val taxiReader: TaxiReader
+    private val taxiReader: TaxiReader,
 ) {
     fun register(request: RegisterTaxi): Long {
         driverReader.getDriver(request.driverId)

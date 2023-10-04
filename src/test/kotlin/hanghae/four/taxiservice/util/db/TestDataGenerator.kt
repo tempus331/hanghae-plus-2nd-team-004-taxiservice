@@ -6,6 +6,5 @@ import org.springframework.stereotype.Component
 class TestDataGenerator {
 
     fun generateTaxis() {
-
     }
 }

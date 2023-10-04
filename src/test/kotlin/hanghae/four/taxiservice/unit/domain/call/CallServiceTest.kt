@@ -10,7 +10,11 @@ import hanghae.four.taxiservice.unit.domain.call.fakes.FakeTaxiFinder
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
 
@@ -57,7 +61,6 @@ internal class CallServiceTest {
             }
         }
 
-
         @DisplayName("호출 가능한 택시가 존재하지 않을 경우")
         @Nested
         inner class Context_of_not_exists_taxi {
@@ -72,7 +75,9 @@ internal class CallServiceTest {
                     userId = 1L
                 )
 
-                every { taxiAllocator.execute(any(), any()) } throws IllegalArgumentException("호출 가능한 택시가 없습니다.") // 익셉션 발생
+                every {
+                    taxiAllocator.execute(any(), any())
+                } throws IllegalArgumentException("호출 가능한 택시가 없습니다.") // 익셉션 발생
                 assertThrows<IllegalArgumentException> { sut.call(callCommand) }
             }
         }
