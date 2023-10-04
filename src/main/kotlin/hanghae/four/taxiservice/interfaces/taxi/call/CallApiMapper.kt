@@ -1,6 +1,5 @@
 package hanghae.four.taxiservice.interfaces.taxi.call
 
-import hanghae.four.taxiservice.domain.driver.DriverInfo
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallResult
