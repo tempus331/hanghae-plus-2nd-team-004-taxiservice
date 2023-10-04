@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class DriverReaderImpl(
-    private val driverRepository: DriverRepository
+    private val driverRepository: DriverRepository,
 ) : DriverReader {
 
     override fun getDriver(driverId: Long): Driver {

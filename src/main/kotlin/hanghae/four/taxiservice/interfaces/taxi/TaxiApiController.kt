@@ -10,12 +10,15 @@ import javax.validation.Valid
 
 @RestController
 class TaxiApiController(
-    private val taxiFacade: TaxiFacade
+    private val taxiFacade: TaxiFacade,
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/taxis")
-    fun register(@Valid @RequestBody request: RegisterRequest): RegisterResponse {
+    fun register(
+        @Valid @RequestBody
+        request: RegisterRequest,
+    ): RegisterResponse {
         val taxiId = taxiFacade.register(request.toTaxiCommand())
         return RegisterResponse(taxiId = taxiId)
     }

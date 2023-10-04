@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class TaxiFacade(
-    private val taxiService: TaxiService
+    private val taxiService: TaxiService,
 ) {
     fun register(request: RegisterTaxi): Long {
         return taxiService.register(request)
