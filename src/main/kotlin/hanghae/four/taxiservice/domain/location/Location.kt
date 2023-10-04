@@ -29,4 +29,7 @@ class Location (
 
     @Column(name = "longitude", nullable = true)
     val longitude: Double,
+
+    @Column(name = "clientId", nullable = false)
+    val clientId: Long,
 )
