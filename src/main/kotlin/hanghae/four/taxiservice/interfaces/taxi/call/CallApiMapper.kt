@@ -2,8 +2,10 @@ package hanghae.four.taxiservice.interfaces.taxi.call
 
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.CallCommand
+import hanghae.four.taxiservice.domain.taxi.call.CallDetailInfo
 import hanghae.four.taxiservice.domain.taxi.call.CallResult
 import hanghae.four.taxiservice.domain.taxi.call.toDriverData
+import hanghae.four.taxiservice.domain.taxi.call.toResponse
 import hanghae.four.taxiservice.domain.taxi.call.toTaxiData
 import org.springframework.stereotype.Component
 
@@ -27,5 +29,9 @@ class CallApiMapper {
             driverData = callResult.toDriverData(),
             taxiData = callResult.toTaxiData()
         )
+    }
+
+    fun mapToCallDetailResponse(detailInfo: CallDetailInfo): CallDetailResponse? {
+        return detailInfo.toResponse()
     }
 }
