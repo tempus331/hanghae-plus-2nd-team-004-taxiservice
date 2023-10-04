@@ -9,8 +9,8 @@ import hanghae.four.taxiservice.domain.taxi.call.CallService
 import hanghae.four.taxiservice.domain.taxi.call.FareCalculator
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.DispatchResult
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.toCallResult
+import hanghae.four.taxiservice.infrastructures.taxi.call.exception.CallNotFoundException
 import hanghae.four.taxiservice.unit.domain.call.fakes.FakeTaxiFinder
-import hanghae.four.taxiservice.unit.infrastructures.call.CallNotFoundException
 import hanghae.four.taxiservice.unit.infrastructures.call.FakeCallRepository
 import io.mockk.every
 import io.mockk.mockk

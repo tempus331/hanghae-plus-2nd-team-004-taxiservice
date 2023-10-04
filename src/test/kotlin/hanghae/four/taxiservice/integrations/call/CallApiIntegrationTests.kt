@@ -41,10 +41,23 @@ class CallApiIntegrationTests(
 
     @Test
     fun `배차 확정 된 기사가 배차 정보를 호출하면 200을 반환한다`() {
-        mockMvc.get("/api/v1/call/{taxiId}", 1L) {
+        // 배차 저장
+        callRepository.save(
+            Call(
+                userId = 1L,
+                origin = "서울시 강남구",
+                destination = "서울시 강북구",
+                status = Call.CallStatus.RUNNING,
+                taxiId = 1L
+            )
+        )
+
+        mockMvc.get("/api/v1/call/{callId}", 1L) {
+            contentType = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isOk() }
-            jsonPath("$.origin") { value("서울시 강북구") }
+            jsonPath("$.origin") { value("서울시 강남구") }
+            jsonPath("$.fare") { value("10000") }
         }
     }
 }

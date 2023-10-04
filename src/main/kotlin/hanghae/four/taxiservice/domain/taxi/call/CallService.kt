@@ -23,6 +23,7 @@ class CallService(
     }
 
     fun getCallDetailInfo(callId: Long): CallDetailInfo = with(callReader.getById(callId)) {
+        // todo: user 정보는 추후 구현
         CallDetailInfo(
             origin = this.origin,
             destination = this.destination,
