@@ -57,7 +57,7 @@ internal class RandomDispatcherTest {
             @DisplayName("false를 리턴한다.")
             @Test
             fun it_return_true() {
-                val res = sut.supports("RANDOM")
+                val res = sut.supports("NOT_RANDOM")
                 assertThat(res).isFalse()
             }
         }

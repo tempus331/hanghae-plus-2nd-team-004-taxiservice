@@ -1,5 +1,6 @@
 package hanghae.four.taxiservice.unit
 
+import com.ninjasquad.springmockk.MockkBean
 import hanghae.four.taxiservice.applications.taxi.call.CallFacade
 import hanghae.four.taxiservice.domain.taxi.call.CallResult
 import hanghae.four.taxiservice.interfaces.taxi.call.CallApiController
@@ -12,16 +13,16 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.post
 
 @WebMvcTest(controllers = [CallApiController::class])
 class CallApiControllerUnitTest : AbstractRestControllerUnitTest() {
 
-    private val callFacade: CallFacade = mockk()
+    @MockkBean
+    private lateinit var callFacade: CallFacade
 
-    @MockBean
+    @MockkBean
     private lateinit var callApiMapper: CallApiMapper
 
     @Test
@@ -50,6 +51,9 @@ class CallApiControllerUnitTest : AbstractRestControllerUnitTest() {
             driverName = "홍길동",
             driverPhoneNumber = "010-1234-5678"
         )
+
+        every { callApiMapper.mapToCallCommand(any()) } returns mockk()
+        every { callApiMapper.mapToResponse(any()) } returns mockResponseFixture
 
         mockMvc.post("/api/v1/call") {
             contentType = MediaType.APPLICATION_JSON
