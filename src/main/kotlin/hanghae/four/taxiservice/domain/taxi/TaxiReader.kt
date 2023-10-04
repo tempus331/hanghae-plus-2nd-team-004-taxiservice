@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TaxiReader {
     fun existsBy(number: Int): Boolean
+    fun findAllNotRunningTaxisByType(type: String): List<Taxi>
 }

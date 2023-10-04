@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class TaxiStoreImpl(
-    private val taxiRepository: TaxiRepository
+    private val taxiRepository: TaxiRepository,
 ) : TaxiStore {
 
     override fun store(taxi: Taxi): Taxi {

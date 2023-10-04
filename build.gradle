@@ -6,6 +6,13 @@ plugins {
 	id 'org.jetbrains.kotlin.jvm' version '1.6.21'
 	id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
 	id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.21'
+    id("org.jlleitschuh.gradle.ktlint") version "11.4.0"
+}
+
+allOpen {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
 }
 
 group = 'hanghae.four'
@@ -31,12 +38,10 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
 	testImplementation 'io.mockk:mockk:1.12.4'
 
 	testImplementation 'io.rest-assured:rest-assured'
 }
-
 tasks.withType(KotlinCompile) {
 	kotlinOptions {
 		freeCompilerArgs += '-Xjsr305=strict'

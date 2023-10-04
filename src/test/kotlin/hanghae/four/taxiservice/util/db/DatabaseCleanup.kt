@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.acceptance
+package hanghae.four.taxiservice.util.db
 
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +15,7 @@ class DatabaseCleanup : InitializingBean {
     private lateinit var tableNames: List<String>
 
     override fun afterPropertiesSet() {
-        tableNames = jdbcTemplate.query("SHOW TABLES", {resultSet, rowNumber -> resultSet.getString(1)})
+        tableNames = jdbcTemplate.query("SHOW TABLES", { resultSet, rowNumber -> resultSet.getString(1) })
     }
 
     @Transactional
