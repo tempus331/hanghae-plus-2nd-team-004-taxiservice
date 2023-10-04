@@ -15,7 +15,7 @@ class CallFacade(
             callNumber = res.callNumber,
             taxiNumber = res.taxiNumber,
             driverName = res.driverName,
-            driverPhoneNumber = res.driverPhoneNumber,
+            driverPhoneNumber = res.driverPhoneNumber
         )
     }
 }

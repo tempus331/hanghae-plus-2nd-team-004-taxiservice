@@ -1,9 +1,9 @@
 package hanghae.four.taxiservice.infrastructures.taxi.call
 
-import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.domain.driver.DriverReader
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
+import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallStore
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.DispatchResult
@@ -33,8 +33,9 @@ class RandomDispatcher(
      *  5.
      */
     override fun dispatch(taxis: List<Taxi>, callCommand: CallCommand): DispatchResult {
-        if (taxis.isEmpty())
+        if (taxis.isEmpty()) {
             throw NotExistsCallableTaxiException()
+        }
 
         val selectTaxi = taxis.random()
         val storedTaxi = taxiStore.store(selectTaxi.run { this.departToCustomer() })
@@ -45,8 +46,9 @@ class RandomDispatcher(
                 userId = callCommand.userId,
                 taxiId = selectTaxi.id!!,
                 origin = callCommand.origin,
-                destination = callCommand.destination,
-            ).apply { this.accept() })
+                destination = callCommand.destination
+            ).apply { this.accept() }
+        )
 
         // todo: 택시에게 Call Card 전송 구현은 현재는 생략
 //        if (! sendCall(storedCall, callCommand))

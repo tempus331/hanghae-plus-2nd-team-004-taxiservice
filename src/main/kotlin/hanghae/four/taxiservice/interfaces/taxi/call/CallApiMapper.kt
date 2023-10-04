@@ -17,7 +17,7 @@ class CallApiMapper {
             origin = callRequest.origin,
             destination = callRequest.destination,
             type = callRequest.type,
-            userId = callRequest.userId,
+            userId = callRequest.userId
         )
     }
 
@@ -25,7 +25,7 @@ class CallApiMapper {
         return CallResponse(
             callNumber = callResult.callNumber,
             driverData = callResult.toDriverData(),
-            taxiData = callResult.toTaxiData(),
+            taxiData = callResult.toTaxiData()
         )
     }
 }

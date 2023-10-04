@@ -7,7 +7,7 @@ import hanghae.four.taxiservice.utils.annotations.Store
 @Store
 class CallStoreImpl(
     private val callRepository: CallRepository,
-): CallStore {
+) : CallStore {
 
     override fun store(call: Call): Call {
         return callRepository.save(call)

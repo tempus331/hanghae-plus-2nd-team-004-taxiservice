@@ -7,10 +7,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class TaxiTypeBasedFinder(
-    private val taxiReader: TaxiReader
+    private val taxiReader: TaxiReader,
 ) : TaxiFinder {
 
     override fun findUsableTaxis(type: String): List<Taxi> =
         taxiReader.findAllNotRunningTaxisByType(type)
-
 }
