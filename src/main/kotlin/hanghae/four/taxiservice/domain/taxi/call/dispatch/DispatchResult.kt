@@ -9,12 +9,11 @@ data class DispatchResult(
     val driverPhoneNumber: String,
 )
 
-
 fun DispatchResult.toCallResult(): CallResult {
     return CallResult(
         callNumber = this.callNumber,
         taxiNumber = this.taxiNumber,
         driverName = this.diverName,
-        driverPhoneNumber = this.driverPhoneNumber,
+        driverPhoneNumber = this.driverPhoneNumber
     )
 }

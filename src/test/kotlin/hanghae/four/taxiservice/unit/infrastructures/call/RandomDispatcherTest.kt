@@ -5,14 +5,17 @@ import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
 import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallStore
-import hanghae.four.taxiservice.infrastructures.taxi.call.CallStoreImpl
 import hanghae.four.taxiservice.infrastructures.taxi.call.RandomDispatcher
 import hanghae.four.taxiservice.infrastructures.taxi.call.exception.NotExistsCallableTaxiException
 import hanghae.four.taxiservice.unit.infrastructures.driver.FakeDriverRepository
 import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 @DisplayName("Unit: RandomDispatcher")
 internal class RandomDispatcherTest {
@@ -27,7 +30,7 @@ internal class RandomDispatcherTest {
         sut = RandomDispatcher(
             taxiStore = taxiRepository,
             callStore = callRepository,
-            driverReader = driverReader,
+            driverReader = driverReader
         )
     }
 
@@ -59,7 +62,6 @@ internal class RandomDispatcherTest {
             }
         }
     }
-
 
     @DisplayName("dispatch 메서드는")
     @Nested
@@ -97,7 +99,7 @@ internal class RandomDispatcherTest {
                     userId = 1L,
                     type = "NORMAL",
                     origin = "서울시 강남구",
-                    destination = "서울시 강북구",
+                    destination = "서울시 강북구"
                 )
 
                 /**

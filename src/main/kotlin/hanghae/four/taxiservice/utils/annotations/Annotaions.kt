@@ -7,12 +7,10 @@ import org.springframework.stereotype.Component
 @Component
 annotation class Facade()
 
-
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 @Component
 annotation class Store()
-
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)

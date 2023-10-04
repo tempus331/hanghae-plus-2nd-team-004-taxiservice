@@ -1,7 +1,5 @@
 package hanghae.four.taxiservice.interfaces.taxi.call
 
-import hanghae.four.taxiservice.domain.driver.DriverInfo
-
 data class CallRequest(
     val origin: String,
     val destination: String,

@@ -6,7 +6,11 @@ import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.TaxiDispatcher
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
 
@@ -37,7 +41,12 @@ class TaxiAllocatorTests {
                 val callCommand = mockk<CallCommand>()
 
                 every { dispatcher.supports(any()) } returns false
-                assertThrows<IllegalArgumentException> { sut.execute(listOf(mockTaxi), callCommand) }
+                assertThrows<IllegalArgumentException> {
+                    sut.execute(
+                        listOf(mockTaxi),
+                        callCommand
+                    )
+                }
             }
         }
     }
