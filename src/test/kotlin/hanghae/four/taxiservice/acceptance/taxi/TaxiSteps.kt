@@ -12,7 +12,7 @@ class TaxiSteps : AcceptanceTestSteps() {
         fun `택시 등록`(
             type: Taxi.Type,
             driver: Long,
-            number: Int
+            number: Int,
         ): ExtractableResponse<Response> {
             val params: MutableMap<String, Any> = mutableMapOf()
             params.put("type", type)

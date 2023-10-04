@@ -12,7 +12,7 @@ data class RegisterRequest(
     val driver: Long?,
 
     @field: NotNull(message = "택시 번호는 필수값 입니다.")
-    val number: Int?
+    val number: Int?,
 ) {
     fun toTaxiCommand(): RegisterTaxi {
         return RegisterTaxi(
