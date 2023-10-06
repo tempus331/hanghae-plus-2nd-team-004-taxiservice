@@ -8,10 +8,8 @@ import org.springframework.retry.annotation.Backoff
 import org.springframework.retry.annotation.Recover
 import org.springframework.retry.annotation.Retryable
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
-@Transactional(readOnly = true)
 class CallService(
     val taxiFinder: TaxiFinder,
     val taxiAllocator: TaxiAllocator,
@@ -24,7 +22,6 @@ class CallService(
         maxAttempts = 3,
         backoff = Backoff(delay = 3000L)
     )
-    @Transactional
     fun call(callCommand: CallCommand): CallResult {
         // todo: locking 조회 시점엔 택시가 running 상태가 아니어도 최종 시점엔 running 상태일 수 있음
         val usableTaxis = taxiFinder.findUsableTaxis(callCommand.type)
