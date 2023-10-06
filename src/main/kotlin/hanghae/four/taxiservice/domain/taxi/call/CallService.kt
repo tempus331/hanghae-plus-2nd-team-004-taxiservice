@@ -3,6 +3,10 @@ package hanghae.four.taxiservice.domain.taxi.call
 import hanghae.four.taxiservice.domain.taxi.TaxiAllocator
 import hanghae.four.taxiservice.domain.taxi.TaxiFinder
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.toCallResult
+import hanghae.four.taxiservice.infrastructures.taxi.call.exception.NotExistsCallableTaxiException
+import org.springframework.retry.annotation.Backoff
+import org.springframework.retry.annotation.Recover
+import org.springframework.retry.annotation.Retryable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,6 +19,11 @@ class CallService(
     val fareCalculator: FareCalculator,
 ) {
 
+    @Retryable(
+        value = [NotExistsCallableTaxiException::class],
+        maxAttempts = 3,
+        backoff = Backoff(delay = 3000L)
+    )
     @Transactional
     fun call(callCommand: CallCommand): CallResult {
         // todo: locking 조회 시점엔 택시가 running 상태가 아니어도 최종 시점엔 running 상태일 수 있음
@@ -29,5 +38,11 @@ class CallService(
             destination = this.destination,
             fare = fareCalculator.calculate(origin, destination)
         )
+    }
+
+    @Recover
+    fun recover(): CallResult? {
+        throw NotExistsCallableTaxiException()
+        return null
     }
 }
