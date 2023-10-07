@@ -12,6 +12,6 @@ class PaymentService(
     val callReader: CallReader,
 ) {
     fun pay(request: PaymentCommand): Long {
-        TODO("Not yet implemented")
+        return 1L
     }
 }
