@@ -1,11 +1,14 @@
 package hanghae.four.taxiservice.applications.pay
 
 import hanghae.four.taxiservice.domain.pay.PaymentCommand
-import org.springframework.stereotype.Service
+import hanghae.four.taxiservice.domain.pay.PaymentService
+import hanghae.four.taxiservice.utils.annotations.Facade
 
-@Service
-class PaymentFacade {
+@Facade
+class PaymentFacade(
+    val paymentService: PaymentService,
+) {
     fun pay(request: PaymentCommand): Long {
-        TODO("Not yet implemented")
+        return paymentService.pay(request)
     }
 }

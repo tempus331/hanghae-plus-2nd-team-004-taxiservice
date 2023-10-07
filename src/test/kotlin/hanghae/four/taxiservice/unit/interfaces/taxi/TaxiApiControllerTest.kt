@@ -38,7 +38,7 @@ class TaxiApiControllerTest {
         every { taxiFacade.register(request.toTaxiCommand()) } returns taxiId
 
         mockMvc.perform(
-            post("/taxis")
+            post("/api/v1/taxis")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request))
         )
@@ -52,7 +52,7 @@ class TaxiApiControllerTest {
         val request = RegisterRequest(type = null, 1L, 1234)
 
         mockMvc.perform(
-            post("/taxis")
+            post("/api/v1/taxis")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request))
         )

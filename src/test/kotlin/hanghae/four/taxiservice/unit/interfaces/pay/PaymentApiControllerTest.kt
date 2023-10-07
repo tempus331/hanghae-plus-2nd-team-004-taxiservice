@@ -44,7 +44,7 @@ class PaymentApiControllerTest {
         every { paymentFacade.pay(request.toPayCommand()) } returns paymentId
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/pay")
+            MockMvcRequestBuilders.post("/api/v1/pay")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request))
         )

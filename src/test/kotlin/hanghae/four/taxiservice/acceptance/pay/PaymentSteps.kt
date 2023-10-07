@@ -27,7 +27,7 @@ class PaymentSteps : AcceptanceTestSteps() {
             return given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(params)
-                .`when`().post("/pay")
+                .`when`().post("/api/v1/pay")
                 .then().log().all().extract()
         }
     }

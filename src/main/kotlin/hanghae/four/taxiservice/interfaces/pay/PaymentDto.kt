@@ -9,8 +9,8 @@ data class PayRequest(
     @field: NotNull(message = "사용자 id를 입력해주세요.")
     val clientId: Long,
 
-    @field: NotNull(message = "택시 id를 입력해주세요.")
-    val taxiId: Long,
+    @field: NotNull(message = "택시 호출 id를 입력해주세요.")
+    val callId: Long,
 
     @field: NotNull(message = "결제 요금을 입력해주세요.")
     val amount: BigDecimal,
@@ -23,7 +23,7 @@ data class PayRequest(
     fun toPayCommand(): PaymentCommand {
         return PaymentCommand(
             clientId = clientId,
-            taxiId = taxiId,
+            callId = callId,
             amount = amount,
             payType = payType,
             pgType = pgType
@@ -31,4 +31,4 @@ data class PayRequest(
     }
 }
 
-data class PayResponse(val paymentId: Long) {}
+data class PayResponse(val paymentId: Long)

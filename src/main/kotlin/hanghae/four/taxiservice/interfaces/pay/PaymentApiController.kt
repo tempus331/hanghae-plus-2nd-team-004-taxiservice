@@ -8,11 +8,14 @@ import javax.validation.Valid
 
 @RestController
 class PaymentApiController(
-    val paymentFacade: PaymentFacade
+    val paymentFacade: PaymentFacade,
 ) {
 
-    @PostMapping("/pay")
-    fun pay(@Valid @RequestBody request: PayRequest): PayResponse {
+    @PostMapping("/api/v1/pay")
+    fun pay(
+        @Valid @RequestBody
+        request: PayRequest,
+    ): PayResponse {
         val paymentId = paymentFacade.pay(request.toPayCommand())
         return PayResponse(paymentId = paymentId)
     }
