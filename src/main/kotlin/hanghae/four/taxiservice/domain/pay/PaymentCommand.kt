@@ -7,5 +7,12 @@ data class PaymentCommand(
     val callId: Long,
     val amount: BigDecimal,
     val payType: Payment.Type,
-    val pgType: Payment.Type?,
-)
+) {
+    fun toEntity(): Payment {
+        return Payment(
+            clientId = clientId,
+            callId = callId,
+            type = payType
+        )
+    }
+}

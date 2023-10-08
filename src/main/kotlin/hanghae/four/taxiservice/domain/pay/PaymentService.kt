@@ -10,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional
 class PaymentService(
     val clientReader: ClientReader,
     val callReader: CallReader,
+    val paymentStore: PaymentStore,
 ) {
     fun pay(request: PaymentCommand): Long {
-        return 1L
+        return requireNotNull(paymentStore.store(request.toEntity()).id)
     }
 }

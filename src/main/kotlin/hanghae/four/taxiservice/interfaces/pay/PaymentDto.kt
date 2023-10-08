@@ -25,8 +25,7 @@ data class PayRequest(
             clientId = clientId,
             callId = callId,
             amount = amount,
-            payType = payType,
-            pgType = pgType
+            payType = payType
         )
     }
 }

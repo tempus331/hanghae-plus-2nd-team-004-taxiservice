@@ -4,9 +4,11 @@ import hanghae.four.taxiservice.domain.client.ClientReader
 import hanghae.four.taxiservice.domain.pay.Payment
 import hanghae.four.taxiservice.domain.pay.PaymentCommand
 import hanghae.four.taxiservice.domain.pay.PaymentService
+import hanghae.four.taxiservice.domain.pay.PaymentStore
 import hanghae.four.taxiservice.domain.taxi.call.CallReader
 import hanghae.four.taxiservice.unit.infrastructures.call.FakeCallRepository
 import hanghae.four.taxiservice.unit.infrastructures.client.FakeClientRepository
+import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentStore
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -17,13 +19,15 @@ class PaymentServiceTest {
     private lateinit var paymentService: PaymentService
     private lateinit var clientReader: ClientReader
     private lateinit var callReader: CallReader
+    private lateinit var paymentStore: PaymentStore
 
     @BeforeEach
     fun setup() {
         clientReader = FakeClientRepository()
         callReader = FakeCallRepository()
+        paymentStore = FakePaymentStore()
 
-        paymentService = PaymentService(clientReader, callReader)
+        paymentService = PaymentService(clientReader, callReader, paymentStore)
     }
 
     @Test
@@ -32,8 +36,7 @@ class PaymentServiceTest {
             clientId = 1L,
             callId = 1L,
             amount = BigDecimal(1000),
-            payType = Payment.Type.CASH,
-            pgType = null
+            payType = Payment.Type.CASH
         )
 
         val payId = paymentService.pay(request)
