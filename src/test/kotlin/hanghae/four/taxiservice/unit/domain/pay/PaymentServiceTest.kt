@@ -29,6 +29,8 @@ class PaymentServiceTest {
         paymentHistoryStore = FakePaymentHistoryStore()
 
         paymentService = PaymentService(fakeClientRepository, callReader, paymentHistoryStore)
+
+        fakeClientRepository.store(Client())
     }
 
     @Test
@@ -48,8 +50,6 @@ class PaymentServiceTest {
 
     @Test
     fun `결제시 결제할 회원이 존재하지 않다면 에러`() {
-        fakeClientRepository.store(Client())
-
         val request = PaymentCommand(
             clientId = 2L,
             callId = 1L,

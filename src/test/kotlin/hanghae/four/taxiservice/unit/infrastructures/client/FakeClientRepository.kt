@@ -3,6 +3,7 @@ package hanghae.four.taxiservice.unit.infrastructures.client
 import hanghae.four.taxiservice.domain.client.Client
 import hanghae.four.taxiservice.domain.client.ClientReader
 import hanghae.four.taxiservice.domain.client.ClientStore
+import hanghae.four.taxiservice.infrastructures.util.fail
 import java.util.concurrent.atomic.AtomicLong
 
 class FakeClientRepository : ClientReader, ClientStore {
@@ -25,6 +26,6 @@ class FakeClientRepository : ClientReader, ClientStore {
     }
 
     override fun getClient(clientId: Long): Client {
-        return clients.filter { c -> c.id == clientId }.first()
+        return clients.filter { c -> c.id == clientId }.firstOrNull() ?: fail()
     }
 }
