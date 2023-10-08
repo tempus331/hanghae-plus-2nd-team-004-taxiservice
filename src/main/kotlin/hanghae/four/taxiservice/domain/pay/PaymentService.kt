@@ -15,6 +15,8 @@ class PaymentService(
     fun pay(request: PaymentCommand): Long {
         clientReader.getClient(request.clientId)
 
+        callReader.getBy(request.callId)
+
         return requireNotNull(PaymentHistoryStore.store(request.toEntity()).id)
     }
 }

@@ -5,7 +5,7 @@ import hanghae.four.taxiservice.domain.pay.PaymentCommand
 import hanghae.four.taxiservice.domain.pay.PaymentHistoryStore
 import hanghae.four.taxiservice.domain.pay.PaymentService
 import hanghae.four.taxiservice.domain.pay.payinfo.Payment
-import hanghae.four.taxiservice.domain.taxi.call.CallReader
+import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.unit.infrastructures.call.FakeCallRepository
 import hanghae.four.taxiservice.unit.infrastructures.client.FakeClientRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryStore
@@ -19,18 +19,19 @@ class PaymentServiceTest {
 
     private lateinit var paymentService: PaymentService
     private lateinit var fakeClientRepository: FakeClientRepository
-    private lateinit var callReader: CallReader
+    private lateinit var fakeCallRepository: FakeCallRepository
     private lateinit var paymentHistoryStore: PaymentHistoryStore
 
     @BeforeEach
     fun setup() {
         fakeClientRepository = FakeClientRepository()
-        callReader = FakeCallRepository()
+        fakeCallRepository = FakeCallRepository()
         paymentHistoryStore = FakePaymentHistoryStore()
 
-        paymentService = PaymentService(fakeClientRepository, callReader, paymentHistoryStore)
+        paymentService = PaymentService(fakeClientRepository, fakeCallRepository, paymentHistoryStore)
 
         fakeClientRepository.store(Client())
+        fakeCallRepository.store(Call(userId = 1L, taxiId = 1L, origin = "서울시 강남구", destination = "서울시 강북구"))
     }
 
     @Test
