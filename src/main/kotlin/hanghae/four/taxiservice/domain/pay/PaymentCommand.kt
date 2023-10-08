@@ -14,7 +14,8 @@ data class PaymentCommand(
         return PaymentHistory(
             clientId = clientId,
             callId = callId,
-            type = payType
+            type = payType,
+            amount = amount
         )
     }
 }

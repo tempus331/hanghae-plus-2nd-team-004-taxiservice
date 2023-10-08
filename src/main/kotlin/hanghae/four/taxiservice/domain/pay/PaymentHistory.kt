@@ -1,6 +1,7 @@
 package hanghae.four.taxiservice.domain.pay
 
 import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import java.math.BigDecimal
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -19,6 +20,9 @@ class PaymentHistory(
 
     @Column(name = "type", nullable = false)
     val type: Payment.Type,
+
+    @Column(name = "amount", nullable = false)
+    val amount: BigDecimal,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
