@@ -4,7 +4,7 @@ import hanghae.four.taxiservice.acceptance.AcceptanceTest
 import hanghae.four.taxiservice.acceptance.taxi.TaxiSteps
 import hanghae.four.taxiservice.domain.client.Client
 import hanghae.four.taxiservice.domain.driver.Driver
-import hanghae.four.taxiservice.domain.pay.Payment
+import hanghae.four.taxiservice.domain.pay.payinfo.Payment
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.infrastructures.client.ClientRepository
@@ -29,7 +29,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
 
     @Test
     fun `택시 현금 결제하기`() {
-        // 기사/사용자 등록 -> 택시등록 -> 택시 호출 -> 결제
+        // 기사/사용자 등록 -> 택시등록 -> 결제 방법 등록 -> 택시 호출 -> 결제
         val client = clientRepository.save(Client())
 
         val driver = driverRepository.save(Driver(name = "홍길동", phoneNumber = "010-1234-5678", licenseNumber = "1234"))
@@ -44,12 +44,12 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         val response = PaymentSteps.`택시 요금 결제`(
             requireNotNull(client.id),
             requireNotNull(call.id),
+            null,
             BigDecimal(1000),
-            Payment.Type.CASH,
-            null
+            Payment.Type.CASH
         )
 
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
-        Assertions.assertThat(response.jsonPath().getLong("paymentId")).isEqualTo(1L)
+        Assertions.assertThat(response.jsonPath().getLong("paymentHistoryId")).isEqualTo(1L)
     }
 }

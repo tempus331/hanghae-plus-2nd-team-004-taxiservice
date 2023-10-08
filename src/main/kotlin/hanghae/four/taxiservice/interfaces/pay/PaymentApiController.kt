@@ -16,7 +16,7 @@ class PaymentApiController(
         @Valid @RequestBody
         request: PayRequest,
     ): PayResponse {
-        val paymentId = paymentFacade.pay(request.toPayCommand())
-        return PayResponse(paymentId = paymentId)
+        val paymentHistoryId = paymentFacade.pay(request.toPayCommand())
+        return PayResponse(paymentHistoryId = paymentHistoryId)
     }
 }
