@@ -61,4 +61,18 @@ class PaymentServiceTest {
         Assertions.assertThatThrownBy { paymentService.pay(request) }
             .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
+
+    @Test
+    fun `결제시 호출된 택시가 존재하지 않는다면 에러`() {
+        val request = PaymentCommand(
+            clientId = 1L,
+            callId = 2L,
+            paymentId = null,
+            amount = BigDecimal(1000),
+            payType = Payment.Type.CASH
+        )
+
+        Assertions.assertThatThrownBy { paymentService.pay(request) }
+            .isInstanceOf(java.lang.IllegalArgumentException::class.java)
+    }
 }
