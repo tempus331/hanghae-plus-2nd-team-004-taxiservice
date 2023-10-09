@@ -30,7 +30,7 @@ class PaymentApiControllerTest {
     private lateinit var paymentFacade: PaymentFacade
 
     @Test
-    fun `택시 현금 결제 성공`() {
+    fun `택시 결제 성공`() {
         val request = PayRequest(
             clientId = 1L,
             callId = 1L,

@@ -9,7 +9,8 @@ import hanghae.four.taxiservice.domain.pay.payinfo.Payment
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.unit.infrastructures.call.FakeCallRepository
 import hanghae.four.taxiservice.unit.infrastructures.client.FakeClientRepository
-import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryStore
+import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryRepository
+import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentRepository
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
@@ -25,6 +26,7 @@ class PaymentServiceTest {
     private lateinit var paymentService: PaymentService
     private lateinit var fakeClientRepository: FakeClientRepository
     private lateinit var fakeCallRepository: FakeCallRepository
+    private lateinit var fakePaymentRepository: FakePaymentRepository
     private lateinit var paymentHistoryStore: PaymentHistoryStore
     private lateinit var payFactory: PayFactory
 
@@ -32,11 +34,18 @@ class PaymentServiceTest {
     fun setup() {
         fakeClientRepository = FakeClientRepository()
         fakeCallRepository = FakeCallRepository()
-        paymentHistoryStore = FakePaymentHistoryStore()
+        fakePaymentRepository = FakePaymentRepository()
+        paymentHistoryStore = FakePaymentHistoryRepository()
 
         payFactory = mockk()
 
-        paymentService = PaymentService(fakeClientRepository, fakeCallRepository, paymentHistoryStore, payFactory)
+        paymentService = PaymentService(
+            fakeClientRepository,
+            fakeCallRepository,
+            fakePaymentRepository,
+            paymentHistoryStore,
+            payFactory
+        )
 
         fakeClientRepository.store(Client())
         fakeCallRepository.store(Call(userId = 1L, taxiId = 1L, origin = "서울시 강남구", destination = "서울시 강북구"))
@@ -89,6 +98,8 @@ class PaymentServiceTest {
 
     @Test
     fun `택시 카드 결제 성공`() {
+        fakePaymentRepository.store(Payment(clientId = 1L, type = Payment.Type.SAMSUNGCARD))
+
         val request = PaymentCommand(
             clientId = 1L,
             callId = 1L,

@@ -2,8 +2,8 @@ package hanghae.four.taxiservice.unit.domain.pay
 
 import hanghae.four.taxiservice.domain.pay.PayFactory
 import hanghae.four.taxiservice.domain.pay.payinfo.Payment
-import hanghae.four.taxiservice.infrastructures.pay.CashPayDispatcher
-import hanghae.four.taxiservice.infrastructures.pay.SamsungCardPayDispatcher
+import hanghae.four.taxiservice.infrastructures.pay.dispatcher.CashPayDispatcher
+import hanghae.four.taxiservice.infrastructures.pay.dispatcher.SamsungCardPayDispatcher
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 

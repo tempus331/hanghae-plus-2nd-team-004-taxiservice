@@ -65,7 +65,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
     }
 
     @Test
-    fun `택시 삼성카드 결제하기`() {
+    fun `택시 카드 결제하기`() {
         val payment = paymentRepository.save(Payment(requireNotNull(client.id), Payment.Type.SAMSUNGCARD))
 
         val response = PaymentSteps.`택시 요금 결제`(
@@ -74,6 +74,22 @@ class PaymentAcceptanceTest : AcceptanceTest() {
             payment.id,
             BigDecimal(1000),
             Payment.Type.SAMSUNGCARD
+        )
+
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
+        Assertions.assertThat(response.jsonPath().getLong("paymentHistoryId")).isEqualTo(1L)
+    }
+
+    @Test
+    fun `택시 페이 결제하기`() {
+        val payment = paymentRepository.save(Payment(requireNotNull(client.id), Payment.Type.NAVERPAY))
+
+        val response = PaymentSteps.`택시 요금 결제`(
+            requireNotNull(client.id),
+            requireNotNull(call.id),
+            payment.id,
+            BigDecimal(1000),
+            Payment.Type.NAVERPAY
         )
 
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
