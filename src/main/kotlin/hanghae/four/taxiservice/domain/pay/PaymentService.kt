@@ -11,10 +11,13 @@ class PaymentService(
     val clientReader: ClientReader,
     val callReader: CallReader,
     val PaymentHistoryStore: PaymentHistoryStore,
+    val payFactory: PayFactory,
 ) {
     fun pay(request: PaymentCommand): Long {
         clientReader.getClient(request.clientId)
         callReader.getBy(request.callId)
+
+        payFactory.execute(request.payType)
 
         return requireNotNull(PaymentHistoryStore.store(request.toEntity()).id)
     }
