@@ -48,6 +48,20 @@ class Taxi(
         )
     }
 
+    fun runningComplete(): Taxi {
+        if (this.status != Status.RUNNING) {
+            throw IllegalArgumentException("'운행중'인 상태가 아닙니다. 상태를 확인해주세요.")
+        }
+
+        return Taxi(
+            driverId = this.driverId,
+            type = this.type,
+            number = this.number,
+            status = Status.COMPLETE,
+            id = this.id
+        )
+    }
+
     enum class Type(
         private val description: String,
     ) {

@@ -16,4 +16,8 @@ class TaxiReaderImpl(
     override fun findAllNotRunningTaxisByType(type: String): List<Taxi> {
         return taxiRepository.findAllByTypeAndStatusIs(Taxi.Type.NORMAL, Taxi.Status.WAITING)
     }
+
+    override fun getTaxi(taxiId: Long): Taxi {
+        TODO("Not yet implemented")
+    }
 }

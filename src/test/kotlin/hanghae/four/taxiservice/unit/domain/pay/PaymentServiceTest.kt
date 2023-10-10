@@ -46,6 +46,7 @@ class PaymentServiceTest {
         paymentService = PaymentService(
             fakeClientRepository,
             fakeCallRepository,
+            fakeTaxiRepository,
             fakePaymentRepository,
             paymentHistoryStore,
             payFactory
@@ -109,9 +110,11 @@ class PaymentServiceTest {
             Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.WAITING)
         )
 
+        fakeCallRepository.store(Call(userId = 1L, taxiId = 2L, origin = "서울시 강남구", destination = "서울시 강북구"))
+
         val request = PaymentCommand(
             clientId = 1L,
-            callId = 1L,
+            callId = 2L,
             paymentId = null,
             amount = BigDecimal(1000),
             payType = Payment.Type.CASH
