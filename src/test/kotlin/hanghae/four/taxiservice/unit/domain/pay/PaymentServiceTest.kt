@@ -125,6 +125,20 @@ class PaymentServiceTest {
     }
 
     @Test
+    fun `카드, 페이 결제시 결제 방법이 등록되어 있지 않다면 에러`() {
+        val request = PaymentCommand(
+            clientId = 1L,
+            callId = 1L,
+            paymentId = 1L,
+            amount = BigDecimal(1000),
+            payType = Payment.Type.SAMSUNGCARD
+        )
+
+        Assertions.assertThatThrownBy { paymentService.pay(request) }
+            .isInstanceOf(java.lang.IllegalArgumentException::class.java)
+    }
+
+    @Test
     fun `택시 카드 결제 성공`() {
         fakePaymentRepository.store(Payment(clientId = 1L, type = Payment.Type.SAMSUNGCARD))
 
