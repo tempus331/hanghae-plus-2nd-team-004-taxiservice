@@ -6,11 +6,13 @@ import hanghae.four.taxiservice.domain.pay.PaymentCommand
 import hanghae.four.taxiservice.domain.pay.PaymentHistoryStore
 import hanghae.four.taxiservice.domain.pay.PaymentService
 import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.unit.infrastructures.call.FakeCallRepository
 import hanghae.four.taxiservice.unit.infrastructures.client.FakeClientRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentRepository
+import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
@@ -27,6 +29,7 @@ class PaymentServiceTest {
     private lateinit var fakeClientRepository: FakeClientRepository
     private lateinit var fakeCallRepository: FakeCallRepository
     private lateinit var fakePaymentRepository: FakePaymentRepository
+    private lateinit var fakeTaxiRepository: FakeTaxiRepository
     private lateinit var paymentHistoryStore: PaymentHistoryStore
     private lateinit var payFactory: PayFactory
 
@@ -35,6 +38,7 @@ class PaymentServiceTest {
         fakeClientRepository = FakeClientRepository()
         fakeCallRepository = FakeCallRepository()
         fakePaymentRepository = FakePaymentRepository()
+        fakeTaxiRepository = FakeTaxiRepository()
         paymentHistoryStore = FakePaymentHistoryRepository()
 
         payFactory = mockk()
@@ -48,6 +52,9 @@ class PaymentServiceTest {
         )
 
         fakeClientRepository.store(Client())
+        fakeTaxiRepository.store(
+            Taxi(driverId = 1L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.RUNNING)
+        )
         fakeCallRepository.store(Call(userId = 1L, taxiId = 1L, origin = "서울시 강남구", destination = "서울시 강북구"))
     }
 
@@ -87,6 +94,24 @@ class PaymentServiceTest {
         val request = PaymentCommand(
             clientId = 1L,
             callId = 2L,
+            paymentId = null,
+            amount = BigDecimal(1000),
+            payType = Payment.Type.CASH
+        )
+
+        Assertions.assertThatThrownBy { paymentService.pay(request) }
+            .isInstanceOf(java.lang.IllegalArgumentException::class.java)
+    }
+
+    @Test
+    fun `결제시 호출된 택시가 "운행중"이 아니면 에러`() {
+        fakeTaxiRepository.store(
+            Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.WAITING)
+        )
+
+        val request = PaymentCommand(
+            clientId = 1L,
+            callId = 1L,
             paymentId = null,
             amount = BigDecimal(1000),
             payType = Payment.Type.CASH
