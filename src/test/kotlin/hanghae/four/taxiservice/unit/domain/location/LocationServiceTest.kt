@@ -20,8 +20,8 @@ internal class LocationServiceTest {
     }
 
     @Test
-    @DisplayName("좌표로 조회 시 현재 위치 조회가 성공한 경우")
-    fun `현재 위치 조회가 성공한 경우`() {
+    @DisplayName("좌표로 조회 시 현재 위치 조회가 성공할 경우 정상 처리")
+    fun `현재 위치 조회가 성공한 정상_처리`() {
         // given
         val coordinates = LocationCoordinates(latitude = "37.123", longitude = "-122.456")
 
@@ -37,7 +37,7 @@ internal class LocationServiceTest {
     }
 
     @Test
-    @DisplayName("좌표로 조회 시 유효한 범위의 좌표가 아닌 경우")
+    @DisplayName("좌표로 조회 시 유효한 범위의 좌표가 아닌 경우 예외 처리")
     fun `유효한 좌표가 아닐 때 예외처리 테스트`() {
         // given
         val coordinates = LocationCoordinates(latitude = "1000.0", longitude = "2000.0")
@@ -50,8 +50,8 @@ internal class LocationServiceTest {
     }
 
     @Test
-    @DisplayName("키워드로 조회 시 위치 조회가 성공한 경우")
-    fun `키워드로 위치 조회가 성공한 경우`() {
+    @DisplayName("키워드로 조회 시 위치 조회가 성공한 경우 정상 처리")
+    fun `키워드로 위치 조회가 성공한 경우_정상_처리`() {
         // given
         val keyword = "Sample Location"
 
@@ -67,8 +67,8 @@ internal class LocationServiceTest {
     }
 
     @Test
-    @DisplayName("키워드로 조회 시 키워드가 유효하지 않을 경우")
-    fun `유효한 키워드가 아닐 때 예외처리 테스트`() {
+    @DisplayName("키워드로 조회 시 키워드가 유효하지 않을 경우 예외 처리")
+    fun `유효한 키워드가 아닐 때 예외_처리 테스트`() {
         // given
         val keyword = ""
 
