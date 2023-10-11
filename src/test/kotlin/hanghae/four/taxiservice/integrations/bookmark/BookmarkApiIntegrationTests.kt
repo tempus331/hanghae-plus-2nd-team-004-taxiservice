@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.integrations.location
+package hanghae.four.taxiservice.integrations.bookmark
 
 import hanghae.four.taxiservice.integrations.AbstractIntegrationTests
 import hanghae.four.taxiservice.interfaces.bookmark.ResisterRequest
@@ -10,7 +10,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.post
 
 @SpringBootTest
-class LocationApiIntegrationTests : AbstractIntegrationTests() {
+class BookmarkApiIntegrationTests : AbstractIntegrationTests() {
 
     @Test
     fun `위치를 즐겨찾기로 등록한다`() {
