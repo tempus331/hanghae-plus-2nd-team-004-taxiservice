@@ -7,11 +7,11 @@ import kotlin.random.Random
 @Service
 @Transactional
 class BookmarkService {
-    fun resister(bookmarkCommand: BookmarkCommand): BookmarkResisterResult {
+    fun register(bookmarkCommand: BookmarkCommand): BookmarkRegisterResult {
         // 저장 부분 추가 예정
         // 임시로 저장된 location id 생성
         val locationId = Random.nextLong(1_000_000_000, 10_000_000_000)
-        return BookmarkResisterResult(
+        return BookmarkRegisterResult(
             locationId = locationId,
             clientId = bookmarkCommand.client
         )

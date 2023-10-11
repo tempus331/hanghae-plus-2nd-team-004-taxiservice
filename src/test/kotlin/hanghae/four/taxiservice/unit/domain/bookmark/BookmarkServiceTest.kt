@@ -31,8 +31,8 @@ internal class BookmarkServiceTest {
             longitude = 127.044529,
         )
 
-        val resisterBookmarkResult = bookmarkService.resister(bookmarkCommand)
+        val registerBookmarkResult = bookmarkService.register(bookmarkCommand)
 
-        assertEquals(1234L, resisterBookmarkResult.clientId)
+        assertEquals(1234L, registerBookmarkResult.clientId)
     }
 }
