@@ -12,15 +12,7 @@ import kotlin.random.Random
 class LocationService(
     private val locationApiCaller: LocationApiCaller,
 ) {
-    fun add(addCommand: AddCommand): AddResult {
-        // 저장 부분 추가 예정
-        // 임시로 저장된 location id 생성
-        val locationId = Random.nextLong(1_000_000_000, 10_000_000_000)
-        return AddResult(
-            locationId = locationId,
-            clientId = addCommand.client
-        )
-    }
+
     fun getCurrentLocationByCoordinates(coordinates: LocationCoordinates): Location {
         return locationApiCaller.getCurrentLocationByCoordinates(coordinates)
     }

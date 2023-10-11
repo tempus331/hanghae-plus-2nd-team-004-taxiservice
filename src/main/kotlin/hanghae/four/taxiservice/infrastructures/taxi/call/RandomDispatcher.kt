@@ -1,6 +1,6 @@
 package hanghae.four.taxiservice.infrastructures.taxi.call
 
-import hanghae.four.taxiservice.domain.driver.DriverReader
+import hanghae.four.taxiservice.domain.taxi.call.driver.DriverReader
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
 import hanghae.four.taxiservice.domain.taxi.call.Call

@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.domain.location
+package hanghae.four.taxiservice.domain.bookmark.location
 
 import javax.persistence.Column
 import javax.persistence.Entity
