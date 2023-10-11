@@ -1,8 +1,7 @@
 package hanghae.four.taxiservice.integrations.location
 
 import hanghae.four.taxiservice.integrations.AbstractIntegrationTests
-import hanghae.four.taxiservice.interfaces.location.AddRequest
-import hanghae.four.taxiservice.interfaces.location.AddResponse
+import hanghae.four.taxiservice.interfaces.bookmark.ResisterRequest
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
@@ -15,7 +14,7 @@ class LocationApiIntegrationTests : AbstractIntegrationTests() {
 
     @Test
     fun `위치를 즐겨찾기로 등록한다`() {
-        val mockRequest = AddRequest(
+        val mockRequest = ResisterRequest(
             clientId = 100L,
             country = "",
             city = "",
@@ -24,7 +23,7 @@ class LocationApiIntegrationTests : AbstractIntegrationTests() {
             longitude = 127.044529,
         )
 
-        mockMvc.post("/api/v1/location/add") {
+        mockMvc.post("/api/v1/bookmark/register") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(mockRequest)
         }.andExpect {
