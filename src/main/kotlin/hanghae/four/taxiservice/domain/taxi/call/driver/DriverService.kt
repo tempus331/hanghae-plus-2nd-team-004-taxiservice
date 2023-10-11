@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.domain.driver
+package hanghae.four.taxiservice.domain.taxi.call.driver
 
 import org.springframework.stereotype.Service
 
