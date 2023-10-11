@@ -1,6 +1,6 @@
-package hanghae.four.taxiservice.interfaces.location
+package hanghae.four.taxiservice.interfaces.bookmark
 
-data class AddRequest(
+data class ResisterRequest(
     val clientId : Long,
     val country : String,
     val city : String,
