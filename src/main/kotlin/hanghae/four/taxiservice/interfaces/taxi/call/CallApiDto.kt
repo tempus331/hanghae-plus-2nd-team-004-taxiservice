@@ -21,3 +21,9 @@ data class DriverData(
 data class TaxiData(
     val taxiNumber: Int,
 )
+
+data class CallDetailResponse(
+    val origin: String,
+    val destination: String,
+    val fare: Int,
+)

@@ -2,6 +2,7 @@ spring:
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MySQL
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
     show-sql: true
