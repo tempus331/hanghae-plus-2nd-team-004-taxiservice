@@ -1,8 +1,8 @@
 package hanghae.four.taxiservice.acceptance.taxi
 
 import hanghae.four.taxiservice.acceptance.AcceptanceTest
-import hanghae.four.taxiservice.domain.driver.Driver
 import hanghae.four.taxiservice.domain.taxi.Taxi
+import hanghae.four.taxiservice.domain.taxi.call.driver.Driver
 import hanghae.four.taxiservice.infrastructures.driver.DriverRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
