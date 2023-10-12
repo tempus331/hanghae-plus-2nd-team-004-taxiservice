@@ -1,9 +1,11 @@
 package hanghae.four.taxiservice.unit
 
+import com.ninjasquad.springmockk.MockkBean
 import hanghae.four.taxiservice.applications.taxi.call.CallFacade
 import hanghae.four.taxiservice.domain.taxi.call.CallResult
 import hanghae.four.taxiservice.interfaces.taxi.call.CallApiController
 import hanghae.four.taxiservice.interfaces.taxi.call.CallApiMapper
+import hanghae.four.taxiservice.interfaces.taxi.call.CallDetailResponse
 import hanghae.four.taxiservice.interfaces.taxi.call.CallRequest
 import hanghae.four.taxiservice.interfaces.taxi.call.CallResponse
 import hanghae.four.taxiservice.interfaces.taxi.call.DriverData
@@ -12,16 +14,17 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 
 @WebMvcTest(controllers = [CallApiController::class])
 class CallApiControllerUnitTest : AbstractRestControllerUnitTest() {
 
-    private val callFacade: CallFacade = mockk()
+    @MockkBean
+    private lateinit var callFacade: CallFacade
 
-    @MockBean
+    @MockkBean
     private lateinit var callApiMapper: CallApiMapper
 
     @Test
@@ -51,6 +54,9 @@ class CallApiControllerUnitTest : AbstractRestControllerUnitTest() {
             driverPhoneNumber = "010-1234-5678"
         )
 
+        every { callApiMapper.mapToCallCommand(any()) } returns mockk()
+        every { callApiMapper.mapToResponse(any()) } returns mockResponseFixture
+
         mockMvc.post("/api/v1/call") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(callRequestFixture)
@@ -59,6 +65,25 @@ class CallApiControllerUnitTest : AbstractRestControllerUnitTest() {
             content {
                 json(objectMapper.writeValueAsString(mockResponseFixture))
             }
+        }
+    }
+
+    @Test
+    fun `택시 기사는 배정된 Call의 상세 정보를 요창하면 200을 응답한다`() {
+        val callResponse = CallDetailResponse(
+            origin = "서울시 강남구",
+            destination = "서울시 강북구",
+            fare = 10000
+        )
+
+        every { callApiMapper.mapToCallDetailResponse(any()) } returns callResponse
+        every { callFacade.getCallDetailInfo(any()) } returns mockk()
+
+        mockMvc.get("/api/v1/call/1") {
+            contentType = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { json(objectMapper.writeValueAsString(callResponse)) }
         }
     }
 }
