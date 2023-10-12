@@ -20,7 +20,7 @@ class PaymentService(
 ) {
     fun pay(request: PaymentCommand): Long {
         clientReader.getClient(request.clientId)
-        val call = callReader.getBy(request.callId)
+        val call = callReader.getById(request.callId)
 
         val taxi = taxiReader.getTaxi(call.taxiId)
         taxi.runningComplete()
