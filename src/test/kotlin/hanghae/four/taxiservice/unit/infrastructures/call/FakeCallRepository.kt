@@ -3,6 +3,7 @@ package hanghae.four.taxiservice.unit.infrastructures.call
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.domain.taxi.call.CallReader
 import hanghae.four.taxiservice.domain.taxi.call.CallStore
+import hanghae.four.taxiservice.infrastructures.taxi.call.exception.CallNotFoundException
 import java.util.concurrent.atomic.AtomicLong
 
 internal class FakeCallRepository : CallStore, CallReader {
@@ -31,7 +32,7 @@ internal class FakeCallRepository : CallStore, CallReader {
         return call
     }
 
-    override fun getBy(callId: Long): Call {
-        return requireNotNull(callStore.find { it.id == callId })
+    override fun getById(callId: Long): Call {
+        return callStore.find { it.id == callId } ?: throw CallNotFoundException()
     }
 }

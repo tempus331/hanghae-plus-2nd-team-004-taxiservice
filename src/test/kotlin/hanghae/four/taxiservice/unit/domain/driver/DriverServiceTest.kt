@@ -1,7 +1,7 @@
 package hanghae.four.taxiservice.unit.domain.driver
 
-import hanghae.four.taxiservice.domain.driver.DriverReader
-import hanghae.four.taxiservice.domain.driver.DriverService
+import hanghae.four.taxiservice.domain.taxi.call.driver.DriverReader
+import hanghae.four.taxiservice.domain.taxi.call.driver.DriverService
 import hanghae.four.taxiservice.unit.infrastructures.driver.FakeDriverRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
