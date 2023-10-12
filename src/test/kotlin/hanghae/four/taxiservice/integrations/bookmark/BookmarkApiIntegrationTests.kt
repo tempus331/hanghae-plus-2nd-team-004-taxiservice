@@ -20,7 +20,7 @@ class BookmarkApiIntegrationTests : AbstractIntegrationTests() {
             city = "",
             placeName = "",
             latitude = 37.501952,
-            longitude = 127.044529,
+            longitude = 127.044529
         )
 
         mockMvc.post("/api/v1/bookmark/register") {

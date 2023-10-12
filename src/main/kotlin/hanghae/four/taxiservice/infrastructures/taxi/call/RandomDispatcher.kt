@@ -1,6 +1,5 @@
 package hanghae.four.taxiservice.infrastructures.taxi.call
 
-import hanghae.four.taxiservice.domain.taxi.call.driver.DriverReader
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
 import hanghae.four.taxiservice.domain.taxi.call.Call
@@ -8,6 +7,7 @@ import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallStore
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.DispatchResult
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.TaxiDispatcher
+import hanghae.four.taxiservice.domain.taxi.call.driver.DriverReader
 import hanghae.four.taxiservice.infrastructures.taxi.call.exception.NotExistsCallableTaxiException
 import org.springframework.stereotype.Component
 

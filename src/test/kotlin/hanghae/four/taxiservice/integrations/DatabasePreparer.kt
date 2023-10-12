@@ -1,7 +1,7 @@
 package hanghae.four.taxiservice.integrations
 
-import hanghae.four.taxiservice.domain.taxi.call.driver.Driver
 import hanghae.four.taxiservice.domain.taxi.Taxi
+import hanghae.four.taxiservice.domain.taxi.call.driver.Driver
 import hanghae.four.taxiservice.infrastructures.driver.DriverRepository
 import hanghae.four.taxiservice.infrastructures.taxi.TaxiRepository
 import org.springframework.beans.factory.annotation.Autowired

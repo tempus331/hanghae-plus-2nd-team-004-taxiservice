@@ -1,11 +1,11 @@
 package hanghae.four.taxiservice.unit.domain.taxi
 
-import hanghae.four.taxiservice.domain.taxi.call.driver.DriverReader
 import hanghae.four.taxiservice.domain.taxi.RegisterTaxi
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiReader
 import hanghae.four.taxiservice.domain.taxi.TaxiService
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
+import hanghae.four.taxiservice.domain.taxi.call.driver.DriverReader
 import hanghae.four.taxiservice.unit.infrastructures.driver.FakeDriverRepository
 import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
 import org.assertj.core.api.Assertions.assertThat

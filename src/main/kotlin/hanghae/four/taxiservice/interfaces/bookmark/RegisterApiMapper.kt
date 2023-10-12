@@ -14,14 +14,14 @@ class RegisterApiMapper {
             city = registerRequest.city,
             placeName = registerRequest.placeName,
             latitude = registerRequest.latitude,
-            longitude = registerRequest.longitude,
+            longitude = registerRequest.longitude
         )
     }
 
     fun mapToResponse(bookmarkResisterResult: BookmarkRegisterResult): RegisterResponse {
         return RegisterResponse(
             clientId = bookmarkResisterResult.clientId,
-            locationId = bookmarkResisterResult.locationId,
+            locationId = bookmarkResisterResult.locationId
         )
     }
 }

@@ -1,6 +1,6 @@
 package hanghae.four.taxiservice.domain.bookmark
 
-data class BookmarkCommand (
+data class BookmarkCommand(
     val client: Long,
     val country: String,
     val city: String,
