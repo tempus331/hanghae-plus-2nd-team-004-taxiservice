@@ -1,7 +1,7 @@
 package hanghae.four.taxiservice.integrations.bookmark
 
 import hanghae.four.taxiservice.integrations.AbstractIntegrationTests
-import hanghae.four.taxiservice.interfaces.bookmark.ResisterRequest
+import hanghae.four.taxiservice.interfaces.bookmark.RegisterRequest
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
@@ -14,13 +14,13 @@ class BookmarkApiIntegrationTests : AbstractIntegrationTests() {
 
     @Test
     fun `위치를 즐겨찾기로 등록한다`() {
-        val mockRequest = ResisterRequest(
+        val mockRequest = RegisterRequest(
             clientId = 100L,
             country = "",
             city = "",
             placeName = "",
             latitude = 37.501952,
-            longitude = 127.044529,
+            longitude = 127.044529
         )
 
         mockMvc.post("/api/v1/bookmark/register") {

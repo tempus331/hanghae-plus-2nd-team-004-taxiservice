@@ -12,7 +12,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "bookmark")
-class Bookmark (
+class Bookmark(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +23,5 @@ class Bookmark (
 
     @ManyToOne
     @JoinColumn(name = "location_id")
-    val location: Location
+    val location: Location,
 )

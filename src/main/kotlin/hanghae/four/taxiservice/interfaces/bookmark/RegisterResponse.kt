@@ -1,6 +1,6 @@
 package hanghae.four.taxiservice.interfaces.bookmark
 
-data class ResisterResponse(
+data class RegisterResponse(
     val clientId: Long,
     val locationId: Long,
 )

@@ -5,7 +5,6 @@ import hanghae.four.taxiservice.domain.location.locationCaller.LocationApiCaller
 import hanghae.four.taxiservice.domain.location.locationCaller.LocationCoordinates
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import kotlin.random.Random
 
 @Service
 @Transactional

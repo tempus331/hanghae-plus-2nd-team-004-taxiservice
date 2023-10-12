@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class BookmarkApiController(
     private val bookmarkService: BookmarkService,
-    private val resisterApiMapper: ResisterApiMapper,
+    private val registerApiMapper: RegisterApiMapper,
 ) {
 
     @PostMapping("/api/v1/bookmark/register")
-    fun resisterBookmark(@RequestBody resisterRequest: ResisterRequest): ResponseEntity<ResisterResponse> {
-        val resisterResult = bookmarkService.resister(resisterApiMapper.mapToCommand(resisterRequest))
-        return ResponseEntity.ok(resisterApiMapper.mapToResponse(resisterResult))
+    fun resisterBookmark(@RequestBody registerRequest: RegisterRequest): ResponseEntity<RegisterResponse> {
+        val resisterResult = bookmarkService.register(registerApiMapper.mapToCommand(registerRequest))
+        return ResponseEntity.ok(registerApiMapper.mapToResponse(resisterResult))
     }
 }
