@@ -3,6 +3,7 @@ package hanghae.four.taxiservice.unit.domain.location
 import hanghae.four.taxiservice.domain.location.LocationService
 import hanghae.four.taxiservice.domain.location.locationCaller.LocationCoordinates
 import hanghae.four.taxiservice.unit.domain.location.fakes.FakeLocationApiCaller
+import hanghae.four.taxiservice.unit.domain.location.fakes.FakeTaxiFareCalculationApiCaller
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -16,7 +17,8 @@ internal class LocationServiceTest {
     @BeforeEach
     fun setUp() {
         val fakeLocationApiCaller = FakeLocationApiCaller()
-        locationService = LocationService(fakeLocationApiCaller)
+        val fakeTaxiFareCalculationApiCaller = FakeTaxiFareCalculationApiCaller()
+        locationService = LocationService(fakeLocationApiCaller, fakeTaxiFareCalculationApiCaller)
     }
 
     @Test
@@ -76,6 +78,34 @@ internal class LocationServiceTest {
         // then
         assertThrows<IllegalArgumentException> {
             locationService.getCurrentLocationByKeyword(keyword)
+        }
+    }
+
+    @Test
+    @DisplayName("택시 요금 계산 API 호출 시 유효한 좌표 값일 땐 요금 리턴")
+    fun `택시 요금 계산 API 호출에서 유효한 좌표는 요금 리턴`() {
+        // given
+        val originCoordinates = LocationCoordinates(latitude = "12.345", longitude = "-45.678")
+        val destinationCoordinates = LocationCoordinates(latitude = "37.123", longitude = "-122.456")
+
+        // when
+        val fare = locationService.getCalculatedTaxFare(originCoordinates, destinationCoordinates)
+
+        // then
+        assertEquals(15000L, fare)
+    }
+
+    @Test
+    @DisplayName("택시 요금 계산 API 호출 시 유효한 좌표 값이 아닐 때 예외 처리")
+    fun `택시 요금 계산 API 호출에서 유효하지 않은 좌표는 예외 처리`() {
+        // given
+        val originCoordinates = LocationCoordinates(latitude = "1000.0", longitude = "2000.0")
+        val destinationCoordinates = LocationCoordinates(latitude = "37.123", longitude = "-122.456")
+
+        // when
+        // then
+        assertThrows<IllegalArgumentException> {
+            locationService.getCalculatedTaxFare(originCoordinates, destinationCoordinates)
         }
     }
 }
