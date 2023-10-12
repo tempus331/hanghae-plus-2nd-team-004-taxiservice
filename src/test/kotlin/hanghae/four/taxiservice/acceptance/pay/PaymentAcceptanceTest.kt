@@ -3,10 +3,10 @@ package hanghae.four.taxiservice.acceptance.pay
 import hanghae.four.taxiservice.acceptance.AcceptanceTest
 import hanghae.four.taxiservice.acceptance.taxi.TaxiSteps
 import hanghae.four.taxiservice.domain.client.Client
-import hanghae.four.taxiservice.domain.driver.Driver
 import hanghae.four.taxiservice.domain.pay.payinfo.Payment
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
+import hanghae.four.taxiservice.domain.taxi.call.driver.Driver
 import hanghae.four.taxiservice.infrastructures.client.ClientRepository
 import hanghae.four.taxiservice.infrastructures.driver.DriverRepository
 import hanghae.four.taxiservice.infrastructures.pay.payinfo.PaymentRepository

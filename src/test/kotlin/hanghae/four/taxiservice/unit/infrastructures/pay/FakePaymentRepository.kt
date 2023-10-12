@@ -26,7 +26,6 @@ class FakePaymentRepository : PaymentReader {
     }
 
     override fun getPayment(paymentId: Long, type: Payment.Type): Payment {
-        println(payments.firstOrNull { p -> p.id == paymentId && p.type == type })
         return payments.firstOrNull { p -> p.id == paymentId && p.type == type } ?: fail()
     }
 }

@@ -3,6 +3,7 @@ package hanghae.four.taxiservice.unit.infrastructures.taxi
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiReader
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
+import hanghae.four.taxiservice.infrastructures.util.fail
 import java.util.concurrent.atomic.AtomicLong
 
 class FakeTaxiRepository : TaxiStore, TaxiReader {
@@ -37,6 +38,6 @@ class FakeTaxiRepository : TaxiStore, TaxiReader {
     }
 
     override fun getTaxi(taxiId: Long): Taxi {
-        return taxis.first { it.id == taxiId }
+        return taxis.filter { it.id == taxiId }.firstOrNull() ?: fail()
     }
 }
