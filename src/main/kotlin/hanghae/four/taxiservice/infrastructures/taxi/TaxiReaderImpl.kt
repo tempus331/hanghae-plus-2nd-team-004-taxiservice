@@ -2,6 +2,7 @@ package hanghae.four.taxiservice.infrastructures.taxi
 
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiReader
+import hanghae.four.taxiservice.infrastructures.util.findByIdOrThrow
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -18,6 +19,6 @@ class TaxiReaderImpl(
     }
 
     override fun getTaxi(taxiId: Long): Taxi {
-        TODO("Not yet implemented")
+        return taxiRepository.findByIdOrThrow(taxiId)
     }
 }
