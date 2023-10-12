@@ -14,7 +14,7 @@ class TaxiApiController(
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/taxis")
+    @PostMapping("/api/v1/taxis")
     fun register(
         @Valid @RequestBody
         request: RegisterRequest,

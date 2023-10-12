@@ -2,9 +2,9 @@ package hanghae.four.taxiservice.applications.taxi
 
 import hanghae.four.taxiservice.domain.taxi.RegisterTaxi
 import hanghae.four.taxiservice.domain.taxi.TaxiService
-import org.springframework.stereotype.Service
+import hanghae.four.taxiservice.utils.annotations.Facade
 
-@Service
+@Facade
 class TaxiFacade(
     private val taxiService: TaxiService,
 ) {

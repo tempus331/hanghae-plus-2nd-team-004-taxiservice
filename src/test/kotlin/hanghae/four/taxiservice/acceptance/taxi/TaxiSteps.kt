@@ -22,7 +22,7 @@ class TaxiSteps : AcceptanceTestSteps() {
             return given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(params)
-                .`when`().post("/taxis")
+                .`when`().post("/api/v1/taxis")
                 .then().log().all().extract()
         }
     }
