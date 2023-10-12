@@ -1,10 +1,10 @@
 package hanghae.four.taxiservice.unit.infrastructures.call
 
-import hanghae.four.taxiservice.domain.driver.DriverReader
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
 import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallStore
+import hanghae.four.taxiservice.domain.taxi.call.driver.DriverReader
 import hanghae.four.taxiservice.infrastructures.taxi.call.RandomDispatcher
 import hanghae.four.taxiservice.infrastructures.taxi.call.exception.NotExistsCallableTaxiException
 import hanghae.four.taxiservice.unit.infrastructures.driver.FakeDriverRepository
@@ -57,7 +57,7 @@ internal class RandomDispatcherTest {
             @DisplayName("false를 리턴한다.")
             @Test
             fun it_return_true() {
-                val res = sut.supports("RANDOM")
+                val res = sut.supports("NOT_RANDOM")
                 assertThat(res).isFalse()
             }
         }
