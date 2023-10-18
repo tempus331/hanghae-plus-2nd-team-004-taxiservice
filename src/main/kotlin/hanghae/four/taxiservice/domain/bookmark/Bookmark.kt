@@ -1,13 +1,10 @@
 package hanghae.four.taxiservice.domain.bookmark
 
-import hanghae.four.taxiservice.domain.bookmark.location.Location
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 @Entity
@@ -21,7 +18,12 @@ class Bookmark(
     @Column(name = "client_id", nullable = false)
     val clientId: Long,
 
-    @ManyToOne
-    @JoinColumn(name = "location_id")
-    val location: Location,
+    @Column(name = "placeName", nullable = true)
+    val placeName: String,
+
+    @Column(name = "latitude", nullable = true)
+    val latitude: Double,
+
+    @Column(name = "longitude", nullable = true)
+    val longitude: Double,
 )

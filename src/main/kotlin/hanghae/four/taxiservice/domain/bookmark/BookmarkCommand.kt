@@ -7,4 +7,8 @@ data class BookmarkCommand(
     val placeName: String,
     val latitude: Double,
     val longitude: Double,
-)
+) {
+    fun toEntity(): Bookmark {
+        return Bookmark(clientId = client, placeName = placeName, latitude = latitude, longitude = longitude)
+    }
+}
