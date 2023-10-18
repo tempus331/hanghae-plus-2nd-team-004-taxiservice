@@ -3,18 +3,16 @@ package hanghae.four.taxiservice.unit.domain.bookmark
 import hanghae.four.taxiservice.domain.bookmark.BookmarkCommand
 import hanghae.four.taxiservice.domain.bookmark.BookmarkService
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
+@SpringBootTest
 @DisplayName("Unit: BookmarkApiTest")
 internal class BookmarkServiceTest {
+    @Autowired
     private lateinit var bookmarkService: BookmarkService
-
-    @BeforeEach
-    fun setUp() {
-        bookmarkService = BookmarkService()
-    }
 
     @Test
     @DisplayName("북마크 등록 정상 처리")
