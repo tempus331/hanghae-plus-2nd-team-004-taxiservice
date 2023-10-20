@@ -34,6 +34,8 @@ class PaymentServiceTest {
     private lateinit var paymentHistoryStore: PaymentHistoryStore
     private lateinit var payFactory: PayFactory
 
+    private lateinit var call: Call
+
     @BeforeEach
     fun setup() {
         fakeClientRepository = FakeClientRepository()
@@ -57,11 +59,14 @@ class PaymentServiceTest {
         fakeTaxiRepository.store(
             Taxi(driverId = 1L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.RUNNING)
         )
-        fakeCallRepository.store(Call(userId = 1L, taxiId = 1L, origin = "서울시 강남구", destination = "서울시 강북구"))
+
+        call = fakeCallRepository.store(Call(userId = 1L, taxiId = 1L, origin = "서울시 강남구", destination = "서울시 강북구"))
     }
 
     @Test
     fun `택시 현금 결제 성공`() {
+        call.accept()
+
         val request = PaymentCommand(
             clientId = 1L,
             callId = 1L,
@@ -111,7 +116,8 @@ class PaymentServiceTest {
             Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.WAITING)
         )
 
-        fakeCallRepository.store(Call(userId = 1L, taxiId = 2L, origin = "서울시 강남구", destination = "서울시 강북구"))
+        call = fakeCallRepository.store(Call(userId = 1L, taxiId = 2L, origin = "서울시 강남구", destination = "서울시 강북구"))
+        call.accept()
 
         val request = PaymentCommand(
             clientId = 1L,
@@ -126,7 +132,23 @@ class PaymentServiceTest {
     }
 
     @Test
+    fun `호출된 택시가 "RUNNING" 이 아니라면 에러`() {
+        val request = PaymentCommand(
+            clientId = 1L,
+            callId = 1L,
+            paymentId = 1L,
+            amount = BigDecimal(1000),
+            payType = Payment.Type.SAMSUNGCARD
+        )
+
+        Assertions.assertThatThrownBy { paymentService.pay(request) }
+            .isInstanceOf(java.lang.IllegalStateException::class.java)
+    }
+
+    @Test
     fun `카드, 페이 결제시 결제 방법이 등록되어 있지 않다면 에러`() {
+        call.accept()
+
         val request = PaymentCommand(
             clientId = 1L,
             callId = 1L,
@@ -141,6 +163,8 @@ class PaymentServiceTest {
 
     @Test
     fun `택시 카드 결제 성공`() {
+        call.accept()
+
         fakePaymentRepository.store(Payment(clientId = 1L, type = Payment.Type.SAMSUNGCARD))
 
         val request = PaymentCommand(

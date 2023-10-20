@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class ClientReaderImpl(
-    private val clientRepository: ClientRepository
+    private val clientRepository: ClientRepository,
 ) : ClientReader {
 
     override fun getClient(clientId: Long): Client {
