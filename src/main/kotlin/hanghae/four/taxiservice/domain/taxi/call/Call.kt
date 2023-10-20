@@ -49,10 +49,19 @@ class Call(
         this.status = CallStatus.RUNNING
     }
 
+    fun complete() {
+        if (this.status != CallStatus.RUNNING) {
+            throw IllegalStateException("호출 상태를 확인 해주세요~!")
+        }
+
+        this.status = CallStatus.COMPLETE
+    }
+
     enum class CallStatus(
         private val description: String,
     ) {
         WAITING("기사 응답 대기중"),
         RUNNING("수락 완료"),
+        COMPLETE("완료"),
     }
 }

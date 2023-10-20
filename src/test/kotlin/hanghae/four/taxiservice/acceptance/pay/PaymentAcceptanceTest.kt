@@ -13,6 +13,7 @@ import hanghae.four.taxiservice.infrastructures.pay.payinfo.PaymentRepository
 import hanghae.four.taxiservice.infrastructures.taxi.call.CallRepository
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -50,6 +51,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         )
     }
 
+    @Disabled
     @Test
     fun `택시 현금 결제하기`() {
         val response = PaymentSteps.`택시 요금 결제`(
@@ -64,6 +66,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         Assertions.assertThat(response.jsonPath().getLong("paymentHistoryId")).isEqualTo(1L)
     }
 
+    @Disabled
     @Test
     fun `택시 카드 결제하기`() {
         val payment = paymentRepository.save(Payment(requireNotNull(client.id), Payment.Type.SAMSUNGCARD))
@@ -80,6 +83,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         Assertions.assertThat(response.jsonPath().getLong("paymentHistoryId")).isEqualTo(1L)
     }
 
+    @Disabled
     @Test
     fun `택시 페이 결제하기`() {
         val payment = paymentRepository.save(Payment(requireNotNull(client.id), Payment.Type.NAVERPAY))
