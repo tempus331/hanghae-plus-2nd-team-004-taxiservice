@@ -15,7 +15,7 @@ class PaymentService(
     val callReader: CallReader,
     val taxiReader: TaxiReader,
     val paymentReader: PaymentReader,
-    val PaymentHistoryStore: PaymentHistoryStore,
+    val paymentHistoryStore: PaymentHistoryStore,
     val payFactory: PayFactory,
 ) {
     fun pay(request: PaymentCommand): Long {
@@ -32,6 +32,6 @@ class PaymentService(
 
         payFactory.execute(request.payType)
 
-        return requireNotNull(PaymentHistoryStore.store(request.toEntity()).id)
+        return requireNotNull(paymentHistoryStore.store(request.toEntity()).id)
     }
 }
