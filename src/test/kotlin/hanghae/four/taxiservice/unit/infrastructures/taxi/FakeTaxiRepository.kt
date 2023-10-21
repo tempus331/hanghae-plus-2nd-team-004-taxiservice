@@ -3,7 +3,7 @@ package hanghae.four.taxiservice.unit.infrastructures.taxi
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.TaxiReader
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
-import hanghae.four.taxiservice.infrastructures.util.fail
+import hanghae.four.taxiservice.infrastructure.util.fail
 import java.util.concurrent.atomic.AtomicLong
 
 class FakeTaxiRepository : TaxiStore, TaxiReader {

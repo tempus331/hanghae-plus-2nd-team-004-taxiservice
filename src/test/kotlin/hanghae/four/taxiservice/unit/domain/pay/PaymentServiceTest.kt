@@ -8,7 +8,7 @@ import hanghae.four.taxiservice.domain.pay.PaymentService
 import hanghae.four.taxiservice.domain.pay.payinfo.Payment
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
-import hanghae.four.taxiservice.infrastructures.taxi.call.exception.CallNotFoundException
+import hanghae.four.taxiservice.infrastructure.taxi.call.exception.CallNotFoundException
 import hanghae.four.taxiservice.unit.infrastructures.call.FakeCallRepository
 import hanghae.four.taxiservice.unit.infrastructures.client.FakeClientRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryRepository

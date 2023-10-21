@@ -4,7 +4,7 @@ import com.ninjasquad.springmockk.MockkBean
 import hanghae.four.taxiservice.domain.taxi.TaxiFinder
 import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallService
-import hanghae.four.taxiservice.infrastructures.taxi.call.exception.NotExistsCallableTaxiException
+import hanghae.four.taxiservice.infrastructure.taxi.call.exception.NotExistsCallableTaxiException
 import io.mockk.every
 import io.mockk.verify
 import org.junit.jupiter.api.DisplayName

@@ -2,7 +2,7 @@ package hanghae.four.taxiservice.unit.infrastructures.pay
 
 import hanghae.four.taxiservice.domain.pay.payinfo.Payment
 import hanghae.four.taxiservice.domain.pay.payinfo.PaymentReader
-import hanghae.four.taxiservice.infrastructures.util.fail
+import hanghae.four.taxiservice.infrastructure.util.fail
 import java.util.concurrent.atomic.AtomicLong
 
 class FakePaymentRepository : PaymentReader {

@@ -1,6 +1,6 @@
 package hanghae.four.taxiservice.interfaces.pay
 
-import hanghae.four.taxiservice.applications.pay.PaymentFacade
+import hanghae.four.taxiservice.application.pay.PaymentFacade
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController

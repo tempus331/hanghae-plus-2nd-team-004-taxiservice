@@ -2,7 +2,7 @@ package hanghae.four.taxiservice.unit.interfaces.taxi
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
-import hanghae.four.taxiservice.applications.taxi.TaxiFacade
+import hanghae.four.taxiservice.application.taxi.TaxiFacade
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.interfaces.taxi.RegisterRequest
 import hanghae.four.taxiservice.interfaces.taxi.TaxiApiController

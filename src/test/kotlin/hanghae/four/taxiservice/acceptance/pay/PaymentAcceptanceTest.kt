@@ -7,10 +7,10 @@ import hanghae.four.taxiservice.domain.pay.payinfo.Payment
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.domain.taxi.call.driver.Driver
-import hanghae.four.taxiservice.infrastructures.client.ClientRepository
-import hanghae.four.taxiservice.infrastructures.driver.DriverRepository
-import hanghae.four.taxiservice.infrastructures.pay.payinfo.PaymentRepository
-import hanghae.four.taxiservice.infrastructures.taxi.call.CallRepository
+import hanghae.four.taxiservice.infrastructure.client.ClientRepository
+import hanghae.four.taxiservice.infrastructure.driver.DriverRepository
+import hanghae.four.taxiservice.infrastructure.pay.payinfo.PaymentRepository
+import hanghae.four.taxiservice.infrastructure.taxi.call.CallRepository
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled

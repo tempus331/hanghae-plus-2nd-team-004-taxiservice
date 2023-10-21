@@ -3,7 +3,7 @@ package hanghae.four.taxiservice.unit.infrastructures.client
 import hanghae.four.taxiservice.domain.client.Client
 import hanghae.four.taxiservice.domain.client.ClientReader
 import hanghae.four.taxiservice.domain.client.ClientStore
-import hanghae.four.taxiservice.infrastructures.util.fail
+import hanghae.four.taxiservice.infrastructure.util.fail
 import java.util.concurrent.atomic.AtomicLong
 
 class FakeClientRepository : ClientReader, ClientStore {

@@ -1,7 +1,7 @@
 package hanghae.four.taxiservice.integrations.call
 
 import hanghae.four.taxiservice.domain.taxi.call.Call
-import hanghae.four.taxiservice.infrastructures.taxi.call.CallRepository
+import hanghae.four.taxiservice.infrastructure.taxi.call.CallRepository
 import hanghae.four.taxiservice.integrations.AbstractIntegrationTests
 import hanghae.four.taxiservice.interfaces.taxi.call.CallRequest
 import org.assertj.core.api.Assertions.assertThat

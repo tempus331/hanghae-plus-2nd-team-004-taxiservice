@@ -3,7 +3,7 @@ package hanghae.four.taxiservice.domain.taxi.call
 import hanghae.four.taxiservice.domain.taxi.TaxiAllocator
 import hanghae.four.taxiservice.domain.taxi.TaxiFinder
 import hanghae.four.taxiservice.domain.taxi.call.dispatch.toCallResult
-import hanghae.four.taxiservice.infrastructures.taxi.call.exception.NotExistsCallableTaxiException
+import hanghae.four.taxiservice.infrastructure.taxi.call.exception.NotExistsCallableTaxiException
 import org.springframework.retry.annotation.Backoff
 import org.springframework.retry.annotation.Recover
 import org.springframework.retry.annotation.Retryable

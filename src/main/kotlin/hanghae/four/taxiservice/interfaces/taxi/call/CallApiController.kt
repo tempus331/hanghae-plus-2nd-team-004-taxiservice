@@ -1,6 +1,6 @@
 package hanghae.four.taxiservice.interfaces.taxi.call
 
-import hanghae.four.taxiservice.applications.taxi.call.CallFacade
+import hanghae.four.taxiservice.application.taxi.call.CallFacade
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

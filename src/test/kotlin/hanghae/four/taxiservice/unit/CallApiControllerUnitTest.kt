@@ -1,7 +1,7 @@
 package hanghae.four.taxiservice.unit
 
 import com.ninjasquad.springmockk.MockkBean
-import hanghae.four.taxiservice.applications.taxi.call.CallFacade
+import hanghae.four.taxiservice.application.taxi.call.CallFacade
 import hanghae.four.taxiservice.domain.taxi.call.CallResult
 import hanghae.four.taxiservice.interfaces.taxi.call.CallApiController
 import hanghae.four.taxiservice.interfaces.taxi.call.CallApiMapper
