@@ -2,12 +2,12 @@ package hanghae.four.taxiservice.unit.domain.pay
 
 import hanghae.four.taxiservice.domain.pay.PayFactory
 import hanghae.four.taxiservice.domain.pay.PaymentCommand
-import hanghae.four.taxiservice.domain.pay.PaymentHistoryStore
 import hanghae.four.taxiservice.domain.pay.PaymentService
-import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.pay.PaymentStore
+import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
-import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryRepository
+import hanghae.four.taxiservice.unit.infrastructures.pay.FakePayInfoRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentRepository
 import io.mockk.Runs
 import io.mockk.every
@@ -22,8 +22,8 @@ import java.math.BigDecimal
 class PaymentServiceTest {
 
     private lateinit var paymentService: PaymentService
-    private lateinit var fakePaymentRepository: FakePaymentRepository
-    private lateinit var paymentHistoryStore: PaymentHistoryStore
+    private lateinit var fakePayInfoRepository: FakePayInfoRepository
+    private lateinit var paymentStore: PaymentStore
     private lateinit var payFactory: PayFactory
 
     private lateinit var call: Call
@@ -31,14 +31,14 @@ class PaymentServiceTest {
 
     @BeforeEach
     fun setup() {
-        fakePaymentRepository = FakePaymentRepository()
-        paymentHistoryStore = FakePaymentHistoryRepository()
+        fakePayInfoRepository = FakePayInfoRepository()
+        paymentStore = FakePaymentRepository()
 
         payFactory = mockk()
 
         paymentService = PaymentService(
-            fakePaymentRepository,
-            paymentHistoryStore,
+            fakePayInfoRepository,
+            paymentStore,
             payFactory
         )
 
@@ -53,12 +53,12 @@ class PaymentServiceTest {
         val command = PaymentCommand(
             clientId = 1L,
             callId = 1L,
-            paymentId = null,
+            payInfoId = null,
             amount = BigDecimal(1000),
-            payType = Payment.Type.CASH
+            payType = PayInfo.Type.CASH
         )
 
-        every { payFactory.execute(command.payType) } just Runs
+        every { payFactory.execute(PayInfo(1L, PayInfo.Type.CASH)) } just Runs
 
         val payId = paymentService.pay(command, call, taxi)
 
@@ -75,9 +75,9 @@ class PaymentServiceTest {
         val command = PaymentCommand(
             clientId = 1L,
             callId = 2L,
-            paymentId = null,
+            payInfoId = null,
             amount = BigDecimal(1000),
-            payType = Payment.Type.CASH
+            payType = PayInfo.Type.CASH
         )
 
         Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
@@ -89,9 +89,9 @@ class PaymentServiceTest {
         val command = PaymentCommand(
             clientId = 1L,
             callId = 1L,
-            paymentId = 1L,
+            payInfoId = 1L,
             amount = BigDecimal(1000),
-            payType = Payment.Type.SAMSUNGCARD
+            payType = PayInfo.Type.SAMSUNGCARD
         )
 
         Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
@@ -105,9 +105,9 @@ class PaymentServiceTest {
         val command = PaymentCommand(
             clientId = 1L,
             callId = 1L,
-            paymentId = 1L,
+            payInfoId = 1L,
             amount = BigDecimal(1000),
-            payType = Payment.Type.SAMSUNGCARD
+            payType = PayInfo.Type.SAMSUNGCARD
         )
 
         Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
@@ -118,17 +118,19 @@ class PaymentServiceTest {
     fun `택시 카드 결제 성공`() {
         call.accept()
 
-        fakePaymentRepository.store(Payment(clientId = 1L, type = Payment.Type.SAMSUNGCARD))
+        val payment = PayInfo(clientId = 1L, type = PayInfo.Type.SAMSUNGCARD)
+
+        fakePayInfoRepository.store(payment)
 
         val command = PaymentCommand(
             clientId = 1L,
             callId = 1L,
-            paymentId = 1L,
+            payInfoId = 1L,
             amount = BigDecimal(1000),
-            payType = Payment.Type.SAMSUNGCARD
+            payType = PayInfo.Type.SAMSUNGCARD
         )
 
-        every { payFactory.execute(command.payType) } just Runs
+        every { payFactory.execute(any()) } just Runs
 
         val payId = paymentService.pay(command, call, taxi)
 

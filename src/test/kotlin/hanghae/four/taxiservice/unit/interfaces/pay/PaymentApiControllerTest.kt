@@ -3,7 +3,7 @@ package hanghae.four.taxiservice.unit.interfaces.pay
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import hanghae.four.taxiservice.application.pay.PaymentFacade
-import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import hanghae.four.taxiservice.interfaces.pay.PayRequest
 import hanghae.four.taxiservice.interfaces.pay.PaymentApiController
 import io.mockk.every
@@ -34,9 +34,9 @@ class PaymentApiControllerTest {
         val request = PayRequest(
             clientId = 1L,
             callId = 1L,
-            paymentId = null,
+            payInfoId = null,
             amount = BigDecimal(1000),
-            payType = Payment.Type.CASH
+            payType = PayInfo.Type.CASH
         )
 
         val paymentHistoryId = 1L

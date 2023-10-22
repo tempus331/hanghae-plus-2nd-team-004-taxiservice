@@ -1,6 +1,6 @@
 package hanghae.four.taxiservice.domain.pay
 
-import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import java.math.BigDecimal
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -10,8 +10,8 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "payment_history")
-class PaymentHistory(
+@Table(name = "payment")
+class Payment(
     @Column(name = "client_id", nullable = false)
     val clientId: Long,
 
@@ -19,7 +19,7 @@ class PaymentHistory(
     val callId: Long,
 
     @Column(name = "type", nullable = false)
-    val type: Payment.Type,
+    val type: PayInfo.Type,
 
     @Column(name = "amount", nullable = false)
     val amount: BigDecimal,

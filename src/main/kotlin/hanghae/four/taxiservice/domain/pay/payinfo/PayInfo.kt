@@ -8,8 +8,8 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "payment")
-class Payment(
+@Table(name = "pay_info")
+class PayInfo(
 
     @Column(name = "client_id", nullable = false)
     val clientId: Long,
@@ -34,5 +34,10 @@ class Payment(
         NAVERPAY("네이버페이"),
         KAKAOPAY("카카오페이"),
         TOSSPAY("토스페이"),
+        ;
+
+        fun cashCheck(): Boolean {
+            return this == PayInfo.Type.CASH
+        }
     }
 }

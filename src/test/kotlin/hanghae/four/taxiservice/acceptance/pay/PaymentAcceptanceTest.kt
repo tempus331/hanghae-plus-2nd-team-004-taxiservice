@@ -3,13 +3,13 @@ package hanghae.four.taxiservice.acceptance.pay
 import hanghae.four.taxiservice.acceptance.AcceptanceTest
 import hanghae.four.taxiservice.acceptance.taxi.TaxiSteps
 import hanghae.four.taxiservice.domain.client.Client
-import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.domain.taxi.call.driver.Driver
 import hanghae.four.taxiservice.infrastructure.client.ClientRepository
 import hanghae.four.taxiservice.infrastructure.driver.DriverRepository
-import hanghae.four.taxiservice.infrastructure.pay.payinfo.PaymentRepository
+import hanghae.four.taxiservice.infrastructure.pay.payinfo.PayInfoRepository
 import hanghae.four.taxiservice.infrastructure.taxi.call.CallRepository
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -31,7 +31,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
     private lateinit var callRepository: CallRepository
 
     @Autowired
-    private lateinit var paymentRepository: PaymentRepository
+    private lateinit var payInfoRepository: PayInfoRepository
 
     private lateinit var client: Client
     private lateinit var call: Call
@@ -59,7 +59,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
             requireNotNull(call.id),
             null,
             BigDecimal(1000),
-            Payment.Type.CASH
+            PayInfo.Type.CASH
         )
 
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
@@ -69,14 +69,14 @@ class PaymentAcceptanceTest : AcceptanceTest() {
     @Disabled
     @Test
     fun `택시 카드 결제하기`() {
-        val payment = paymentRepository.save(Payment(requireNotNull(client.id), Payment.Type.SAMSUNGCARD))
+        val payInfo = payInfoRepository.save(PayInfo(requireNotNull(client.id), PayInfo.Type.SAMSUNGCARD))
 
         val response = PaymentSteps.`택시 요금 결제`(
             requireNotNull(client.id),
             requireNotNull(call.id),
-            payment.id,
+            payInfo.id,
             BigDecimal(1000),
-            Payment.Type.SAMSUNGCARD
+            PayInfo.Type.SAMSUNGCARD
         )
 
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
@@ -86,14 +86,14 @@ class PaymentAcceptanceTest : AcceptanceTest() {
     @Disabled
     @Test
     fun `택시 페이 결제하기`() {
-        val payment = paymentRepository.save(Payment(requireNotNull(client.id), Payment.Type.NAVERPAY))
+        val payInfo = payInfoRepository.save(PayInfo(requireNotNull(client.id), PayInfo.Type.NAVERPAY))
 
         val response = PaymentSteps.`택시 요금 결제`(
             requireNotNull(client.id),
             requireNotNull(call.id),
-            payment.id,
+            payInfo.id,
             BigDecimal(1000),
-            Payment.Type.NAVERPAY
+            PayInfo.Type.NAVERPAY
         )
 
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())

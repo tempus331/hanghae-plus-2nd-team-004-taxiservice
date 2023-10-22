@@ -1,17 +1,17 @@
 package hanghae.four.taxiservice.domain.pay
 
-import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import java.math.BigDecimal
 
 data class PaymentCommand(
     val clientId: Long,
     val callId: Long,
-    val paymentId: Long?,
+    val payInfoId: Long?,
     val amount: BigDecimal,
-    val payType: Payment.Type,
+    val payType: PayInfo.Type,
 ) {
-    fun toEntity(): PaymentHistory {
-        return PaymentHistory(
+    fun toEntity(): Payment {
+        return Payment(
             clientId = clientId,
             callId = callId,
             type = payType,
