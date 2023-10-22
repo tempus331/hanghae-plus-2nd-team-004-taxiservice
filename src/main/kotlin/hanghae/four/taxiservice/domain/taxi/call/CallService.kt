@@ -42,4 +42,8 @@ class CallService(
         throw NotExistsCallableTaxiException()
         return null
     }
+
+    fun findCall(callId: Long): Call {
+        return callReader.findCall(callId)
+    }
 }
