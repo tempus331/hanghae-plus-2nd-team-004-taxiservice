@@ -21,4 +21,8 @@ class TaxiReaderImpl(
     override fun getTaxi(taxiId: Long): Taxi {
         return taxiRepository.findByIdOrThrow(taxiId)
     }
+
+    override fun findTaxi(taxiId: Long): Taxi {
+        return taxiRepository.findByIdOrThrow(taxiId)
+    }
 }

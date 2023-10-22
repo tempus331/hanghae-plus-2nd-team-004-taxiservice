@@ -9,7 +9,6 @@ import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentRepository
-import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
@@ -24,31 +23,26 @@ class PaymentServiceTest {
 
     private lateinit var paymentService: PaymentService
     private lateinit var fakePaymentRepository: FakePaymentRepository
-    private lateinit var fakeTaxiRepository: FakeTaxiRepository
     private lateinit var paymentHistoryStore: PaymentHistoryStore
     private lateinit var payFactory: PayFactory
 
     private lateinit var call: Call
+    private lateinit var taxi: Taxi
 
     @BeforeEach
     fun setup() {
         fakePaymentRepository = FakePaymentRepository()
-        fakeTaxiRepository = FakeTaxiRepository()
         paymentHistoryStore = FakePaymentHistoryRepository()
 
         payFactory = mockk()
 
         paymentService = PaymentService(
-            fakeTaxiRepository,
             fakePaymentRepository,
             paymentHistoryStore,
             payFactory
         )
 
-        fakeTaxiRepository.store(
-            Taxi(driverId = 1L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.RUNNING)
-        )
-
+        taxi = Taxi(driverId = 1L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.RUNNING)
         call = Call(userId = 1L, taxiId = 1L, origin = "서울시 강남구", destination = "서울시 강북구")
     }
 
@@ -66,16 +60,14 @@ class PaymentServiceTest {
 
         every { payFactory.execute(command.payType) } just Runs
 
-        val payId = paymentService.pay(command, call)
+        val payId = paymentService.pay(command, call, taxi)
 
         assertThat(payId).isEqualTo(1L)
     }
 
     @Test
     fun `결제시 호출된 택시가 "운행중"이 아니면 에러`() {
-        fakeTaxiRepository.store(
-            Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.WAITING)
-        )
+        taxi = Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.WAITING)
 
         call = Call(userId = 1L, taxiId = 2L, origin = "서울시 강남구", destination = "서울시 강북구")
         call.accept()
@@ -88,7 +80,7 @@ class PaymentServiceTest {
             payType = Payment.Type.CASH
         )
 
-        Assertions.assertThatThrownBy { paymentService.pay(command, call) }
+        Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
             .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 
@@ -102,7 +94,7 @@ class PaymentServiceTest {
             payType = Payment.Type.SAMSUNGCARD
         )
 
-        Assertions.assertThatThrownBy { paymentService.pay(command, call) }
+        Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
             .isInstanceOf(java.lang.IllegalStateException::class.java)
     }
 
@@ -118,7 +110,7 @@ class PaymentServiceTest {
             payType = Payment.Type.SAMSUNGCARD
         )
 
-        Assertions.assertThatThrownBy { paymentService.pay(command, call) }
+        Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
             .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 
@@ -138,7 +130,7 @@ class PaymentServiceTest {
 
         every { payFactory.execute(command.payType) } just Runs
 
-        val payId = paymentService.pay(command, call)
+        val payId = paymentService.pay(command, call, taxi)
 
         assertThat(payId).isEqualTo(1L)
     }
