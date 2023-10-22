@@ -1,7 +1,7 @@
 package hanghae.four.taxiservice.acceptance.pay
 
 import hanghae.four.taxiservice.acceptance.AcceptanceTestSteps
-import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import io.restassured.response.ExtractableResponse
 import io.restassured.response.Response
 import org.springframework.http.MediaType
@@ -13,14 +13,14 @@ class PaymentSteps : AcceptanceTestSteps() {
         fun `택시 요금 결제`(
             clientId: Long,
             callId: Long,
-            paymentId: Long?,
+            payInfo: Long?,
             amount: BigDecimal,
-            payType: Payment.Type,
+            payType: PayInfo.Type,
         ): ExtractableResponse<Response> {
             val params: MutableMap<String, Any?> = mutableMapOf()
             params.put("clientId", clientId)
             params.put("callId", callId)
-            params.put("paymentId", paymentId)
+            params.put("payInfoId", payInfo)
             params.put("amount", amount)
             params.put("payType", payType)
 

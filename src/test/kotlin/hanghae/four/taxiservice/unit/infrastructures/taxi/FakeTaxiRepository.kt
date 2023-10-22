@@ -40,4 +40,8 @@ class FakeTaxiRepository : TaxiStore, TaxiReader {
     override fun getTaxi(taxiId: Long): Taxi {
         return taxis.filter { it.id == taxiId }.firstOrNull() ?: fail()
     }
+
+    override fun findTaxi(taxiId: Long): Taxi {
+        return taxis.filter { it.id == taxiId }.firstOrNull() ?: fail()
+    }
 }

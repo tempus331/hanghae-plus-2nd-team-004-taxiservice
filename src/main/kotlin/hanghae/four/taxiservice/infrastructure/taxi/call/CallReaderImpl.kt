@@ -11,4 +11,8 @@ class CallReaderImpl(
     override fun getById(callId: Long): Call {
         return callRepository.getBy(callId)
     }
+
+    override fun findCall(callId: Long): Call {
+        return callRepository.getBy(callId)
+    }
 }

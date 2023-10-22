@@ -28,4 +28,8 @@ class FakeClientRepository : ClientReader, ClientStore {
     override fun getClient(clientId: Long): Client {
         return clients.filter { c -> c.id == clientId }.firstOrNull() ?: fail()
     }
+
+    override fun findClient(clientId: Long): Client {
+        return clients.filter { c -> c.id == clientId }.firstOrNull() ?: fail()
+    }
 }

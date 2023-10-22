@@ -1,7 +1,7 @@
 package hanghae.four.taxiservice.infrastructure.pay.dispatcher
 
 import hanghae.four.taxiservice.domain.pay.PayDispatcher
-import hanghae.four.taxiservice.domain.pay.payinfo.Payment
+import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component
 class NaverPayPayDispatcher : PayDispatcher {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    override fun supports(type: Payment.Type): Boolean {
-        return Payment.Type.NAVERPAY == type
+    override fun supports(type: PayInfo.Type): Boolean {
+        return PayInfo.Type.NAVERPAY == type
     }
 
-    override fun dispatch() {
+    override fun dispatch(payment: PayInfo) {
         log.info("네이버 페이 결제")
     }
 }

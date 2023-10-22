@@ -16,4 +16,8 @@ class TaxiService(
         val taxi = taxiStore.store(command.toEntity())
         return requireNotNull(taxi.id)
     }
+
+    fun findTaxi(taxiId: Long): Taxi {
+        return taxiReader.findTaxi(taxiId)
+    }
 }
