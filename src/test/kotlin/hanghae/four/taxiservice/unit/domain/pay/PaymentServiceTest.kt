@@ -1,6 +1,5 @@
 package hanghae.four.taxiservice.unit.domain.pay
 
-import hanghae.four.taxiservice.domain.client.Client
 import hanghae.four.taxiservice.domain.pay.PayFactory
 import hanghae.four.taxiservice.domain.pay.PaymentCommand
 import hanghae.four.taxiservice.domain.pay.PaymentHistoryStore
@@ -10,7 +9,6 @@ import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.infrastructure.taxi.call.exception.CallNotFoundException
 import hanghae.four.taxiservice.unit.infrastructures.call.FakeCallRepository
-import hanghae.four.taxiservice.unit.infrastructures.client.FakeClientRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentHistoryRepository
 import hanghae.four.taxiservice.unit.infrastructures.pay.FakePaymentRepository
 import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
@@ -27,7 +25,6 @@ import java.math.BigDecimal
 class PaymentServiceTest {
 
     private lateinit var paymentService: PaymentService
-    private lateinit var fakeClientRepository: FakeClientRepository
     private lateinit var fakeCallRepository: FakeCallRepository
     private lateinit var fakePaymentRepository: FakePaymentRepository
     private lateinit var fakeTaxiRepository: FakeTaxiRepository
@@ -38,7 +35,6 @@ class PaymentServiceTest {
 
     @BeforeEach
     fun setup() {
-        fakeClientRepository = FakeClientRepository()
         fakeCallRepository = FakeCallRepository()
         fakePaymentRepository = FakePaymentRepository()
         fakeTaxiRepository = FakeTaxiRepository()
@@ -47,7 +43,6 @@ class PaymentServiceTest {
         payFactory = mockk()
 
         paymentService = PaymentService(
-            fakeClientRepository,
             fakeCallRepository,
             fakeTaxiRepository,
             fakePaymentRepository,
@@ -55,7 +50,6 @@ class PaymentServiceTest {
             payFactory
         )
 
-        fakeClientRepository.store(Client())
         fakeTaxiRepository.store(
             Taxi(driverId = 1L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.RUNNING)
         )
@@ -80,20 +74,6 @@ class PaymentServiceTest {
         val payId = paymentService.pay(request)
 
         assertThat(payId).isEqualTo(1L)
-    }
-
-    @Test
-    fun `결제시 결제할 회원이 존재하지 않다면 에러`() {
-        val request = PaymentCommand(
-            clientId = 2L,
-            callId = 1L,
-            paymentId = null,
-            amount = BigDecimal(1000),
-            payType = Payment.Type.CASH
-        )
-
-        Assertions.assertThatThrownBy { paymentService.pay(request) }
-            .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 
     @Test

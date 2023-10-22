@@ -13,4 +13,8 @@ class ClientReaderImpl(
     override fun getClient(clientId: Long): Client {
         return clientRepository.findByIdOrThrow(clientId)
     }
+
+    override fun findClient(clientId: Long): Client {
+        return clientRepository.findByIdOrThrow(clientId)
+    }
 }

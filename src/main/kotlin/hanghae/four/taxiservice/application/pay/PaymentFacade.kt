@@ -8,7 +8,7 @@ import hanghae.four.taxiservice.util.annotations.Facade
 class PaymentFacade(
     val paymentService: PaymentService,
 ) {
-    fun pay(request: PaymentCommand): Long {
-        return paymentService.pay(request)
+    fun pay(command: PaymentCommand): Long {
+        return paymentService.pay(command)
     }
 }
