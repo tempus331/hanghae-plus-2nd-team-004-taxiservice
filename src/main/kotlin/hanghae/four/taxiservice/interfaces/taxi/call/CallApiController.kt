@@ -27,4 +27,10 @@ class CallApiController(
         val detailInfo = callFacade.getCallDetailInfo(callId)
         return ResponseEntity.ok(callMapper.mapToCallDetailResponse(detailInfo))
     }
+
+    @GetMapping("/api/v1/call/clients")
+    fun getCallingClients(): ResponseEntity<CallingClientsResponse> {
+        val callingClients = callFacade.getCallingClients()
+        return ResponseEntity.ok(callMapper.mapToCallingClientsResponse(callingClients))
+    }
 }
