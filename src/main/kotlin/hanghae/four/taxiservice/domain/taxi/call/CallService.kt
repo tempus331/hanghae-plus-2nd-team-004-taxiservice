@@ -8,6 +8,7 @@ import org.springframework.retry.annotation.Backoff
 import org.springframework.retry.annotation.Recover
 import org.springframework.retry.annotation.Retryable
 import org.springframework.stereotype.Service
+import java.util.stream.Collectors
 
 @Service
 class CallService(
@@ -45,5 +46,9 @@ class CallService(
 
     fun findCall(callId: Long): Call {
         return callReader.findCall(callId)
+    }
+
+    fun getCallingClients(): CallingClients {
+        return CallingClients(callReader.findCallingClients().stream().map { it.userId }.collect(Collectors.toList()))
     }
 }
