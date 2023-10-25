@@ -2,7 +2,7 @@ package hanghae.four.taxiservice.infrastructure.taxi.call
 
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.domain.taxi.call.CallStore
-import hanghae.four.taxiservice.util.annotations.Store
+import hanghae.four.taxiservice.global.annotations.Store
 
 @Store
 class CallStoreImpl(

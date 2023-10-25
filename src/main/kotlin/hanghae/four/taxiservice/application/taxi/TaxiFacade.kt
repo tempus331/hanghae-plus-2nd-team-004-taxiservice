@@ -3,7 +3,7 @@ package hanghae.four.taxiservice.application.taxi
 import hanghae.four.taxiservice.domain.taxi.RegisterTaxi
 import hanghae.four.taxiservice.domain.taxi.TaxiService
 import hanghae.four.taxiservice.domain.taxi.call.driver.DriverService
-import hanghae.four.taxiservice.util.annotations.Facade
+import hanghae.four.taxiservice.global.annotations.Facade
 
 @Facade
 class TaxiFacade(

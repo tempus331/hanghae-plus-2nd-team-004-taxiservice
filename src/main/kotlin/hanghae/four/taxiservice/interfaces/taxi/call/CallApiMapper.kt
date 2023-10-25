@@ -4,6 +4,7 @@ import hanghae.four.taxiservice.domain.taxi.Taxi
 import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallDetailInfo
 import hanghae.four.taxiservice.domain.taxi.call.CallResult
+import hanghae.four.taxiservice.domain.taxi.call.CallingClients
 import hanghae.four.taxiservice.domain.taxi.call.toDriverData
 import hanghae.four.taxiservice.domain.taxi.call.toResponse
 import hanghae.four.taxiservice.domain.taxi.call.toTaxiData
@@ -33,5 +34,9 @@ class CallApiMapper {
 
     fun mapToCallDetailResponse(detailInfo: CallDetailInfo): CallDetailResponse? {
         return detailInfo.toResponse()
+    }
+
+    fun mapToCallingClientsResponse(callingClients: CallingClients): CallingClientsResponse? {
+        return CallingClientsResponse(callingClients.clientIdList)
     }
 }

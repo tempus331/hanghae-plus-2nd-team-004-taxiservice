@@ -7,4 +7,6 @@ import org.springframework.data.repository.findByIdOrNull
 
 fun CallRepository.getBy(id: Long) = findByIdOrNull(id) ?: throw CallNotFoundException()
 
-interface CallRepository : JpaRepository<Call, Long>
+interface CallRepository : JpaRepository<Call, Long> {
+    fun findByStatus(status: Call.CallStatus): List<Call>
+}
