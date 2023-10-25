@@ -4,7 +4,7 @@ import hanghae.four.taxiservice.domain.pay.PaymentCommand
 import hanghae.four.taxiservice.domain.pay.PaymentService
 import hanghae.four.taxiservice.domain.taxi.TaxiService
 import hanghae.four.taxiservice.domain.taxi.call.CallService
-import hanghae.four.taxiservice.util.annotations.Facade
+import hanghae.four.taxiservice.global.annotations.Facade
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional

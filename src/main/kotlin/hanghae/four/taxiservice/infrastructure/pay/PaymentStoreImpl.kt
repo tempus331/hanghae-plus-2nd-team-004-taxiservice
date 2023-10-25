@@ -2,7 +2,7 @@ package hanghae.four.taxiservice.infrastructure.pay
 
 import hanghae.four.taxiservice.domain.pay.Payment
 import hanghae.four.taxiservice.domain.pay.PaymentStore
-import hanghae.four.taxiservice.util.annotations.Store
+import hanghae.four.taxiservice.global.annotations.Store
 
 @Store
 class PaymentStoreImpl(

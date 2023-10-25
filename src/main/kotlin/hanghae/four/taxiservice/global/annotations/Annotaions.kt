@@ -1,4 +1,4 @@
-package hanghae.four.taxiservice.util.annotations
+package hanghae.four.taxiservice.global.annotations
 
 import org.springframework.stereotype.Component
 
