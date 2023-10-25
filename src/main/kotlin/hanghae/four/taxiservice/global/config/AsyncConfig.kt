@@ -12,8 +12,8 @@ class AsyncConfig {
     fun taskExecutor(): TaskExecutor {
         val taskExecutor = ThreadPoolTaskExecutor()
         taskExecutor.corePoolSize = 20
-        taskExecutor.maxPoolSize = 50
         taskExecutor.queueCapacity = 200
+        taskExecutor.maxPoolSize = 50
         taskExecutor.setTaskDecorator(LoggingTaskDecorator())
 
         return taskExecutor
