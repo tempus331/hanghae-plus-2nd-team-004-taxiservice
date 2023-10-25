@@ -2,7 +2,7 @@ package hanghae.four.taxiservice.infrastructure.taxi.call
 
 import hanghae.four.taxiservice.domain.taxi.call.Call
 import hanghae.four.taxiservice.domain.taxi.call.CallReader
-import hanghae.four.taxiservice.util.annotations.Reader
+import hanghae.four.taxiservice.global.annotations.Reader
 
 @Reader
 class CallReaderImpl(
