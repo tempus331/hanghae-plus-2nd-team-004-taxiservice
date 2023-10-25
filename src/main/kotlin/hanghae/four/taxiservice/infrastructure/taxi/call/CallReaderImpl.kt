@@ -15,4 +15,8 @@ class CallReaderImpl(
     override fun findCall(callId: Long): Call {
         return callRepository.getBy(callId)
     }
+
+    override fun findCallingClients(): List<Call> {
+        return callRepository.findByStatus(Call.CallStatus.WAITING)
+    }
 }

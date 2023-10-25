@@ -39,4 +39,8 @@ internal class FakeCallRepository : CallStore, CallReader {
     override fun findCall(callId: Long): Call {
         return callStore.find { it.id == callId } ?: throw CallNotFoundException()
     }
+
+    override fun findCallingClients(): List<Call> {
+        return emptyList<Call>()
+    }
 }

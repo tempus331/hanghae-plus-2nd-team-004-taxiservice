@@ -4,6 +4,7 @@ import hanghae.four.taxiservice.domain.taxi.call.CallCommand
 import hanghae.four.taxiservice.domain.taxi.call.CallDetailInfo
 import hanghae.four.taxiservice.domain.taxi.call.CallResult
 import hanghae.four.taxiservice.domain.taxi.call.CallService
+import hanghae.four.taxiservice.domain.taxi.call.CallingClients
 import hanghae.four.taxiservice.global.annotations.Facade
 
 @Facade
@@ -22,5 +23,9 @@ class CallFacade(
 
     fun getCallDetailInfo(taxiId: Long): CallDetailInfo {
         return callService.getCallDetailInfo(taxiId)
+    }
+
+    fun getCallingClients(): CallingClients {
+        return callService.getCallingClients()
     }
 }

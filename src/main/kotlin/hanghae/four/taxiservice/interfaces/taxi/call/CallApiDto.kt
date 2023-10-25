@@ -27,3 +27,7 @@ data class CallDetailResponse(
     val destination: String,
     val fare: Int,
 )
+
+data class CallingClientsResponse(
+    val clientIdList: List<Long>?,
+)
