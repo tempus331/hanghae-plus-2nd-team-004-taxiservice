@@ -9,6 +9,6 @@ class DriverStoreImpl(
     private val driverRepository: DriverRepository,
 ) : DriverStore {
     override fun register(driver: Driver): Driver {
-        TODO("Not yet implemented")
+        return driverRepository.save(driver)
     }
 }
