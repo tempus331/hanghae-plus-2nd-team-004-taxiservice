@@ -15,7 +15,7 @@ class ClientServiceTest {
     fun setup() {
         fakeClientRepository = FakeClientRepository()
 
-        clientService = ClientService(fakeClientRepository)
+        clientService = ClientService(fakeClientRepository, fakeClientRepository)
 
         fakeClientRepository.store(Client())
     }
