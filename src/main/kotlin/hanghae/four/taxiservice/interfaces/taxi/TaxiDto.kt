@@ -24,3 +24,10 @@ data class RegisterRequest(
 }
 
 data class RegisterResponse(val taxiId: Long)
+
+data class TaxiResponse(
+    val taxiId: Long,
+    val type: Taxi.Type,
+    val number: Int,
+    val status: Taxi.Status,
+)
