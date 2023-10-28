@@ -25,7 +25,7 @@ class Taxi(
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    val status: Status,
+    var status: Status,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,13 @@ class Taxi(
         if (number <= 0) {
             throw IllegalArgumentException("택시 번호는 0 또는 음수가 될수 없습니다.")
         }
+    }
+
+    fun updateWaiting() {
+        if (this.status != Status.CLOSED) {
+            throw IllegalArgumentException("'미운행'인 상태가 아닙니다. 상태를 확인해주세요.")
+        }
+        this.status = Status.WAITING
     }
 
     fun departToCustomer(): Taxi {
