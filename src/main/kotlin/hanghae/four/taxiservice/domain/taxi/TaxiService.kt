@@ -1,6 +1,7 @@
 package hanghae.four.taxiservice.domain.taxi
 
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import javax.persistence.EntityExistsException
 
 @Service
@@ -19,5 +20,17 @@ class TaxiService(
 
     fun findTaxi(taxiId: Long): Taxi {
         return taxiReader.findTaxi(taxiId)
+    }
+
+    @Transactional
+    fun updateTaxiWait(taxiId: Long): TaxiResult.TaxiResponse {
+        val taxi = taxiReader.getTaxi(taxiId)
+        taxi.updateWaiting()
+        return TaxiResult.TaxiResponse(
+            taxiId = requireNotNull(taxi.id),
+            type = taxi.type,
+            number = taxi.number,
+            status = taxi.status
+        )
     }
 }

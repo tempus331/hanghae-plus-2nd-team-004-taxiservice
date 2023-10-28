@@ -25,5 +25,14 @@ class TaxiSteps : AcceptanceTestSteps() {
                 .`when`().post("/api/v1/taxis")
                 .then().log().all().extract()
         }
+
+        fun `택시 WAITING 상태 변경`(
+            taxiId: Long,
+        ): ExtractableResponse<Response> {
+            return given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .`when`().put("/api/v1/taxis/{taxiId}/wait", taxiId)
+                .then().log().all().extract()
+        }
     }
 }
