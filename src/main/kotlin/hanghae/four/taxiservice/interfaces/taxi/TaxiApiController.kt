@@ -35,4 +35,15 @@ class TaxiApiController(
             status = taxiResponse.status
         )
     }
+
+    @PutMapping("/api/v1/taxis/{taxiId}/check-in")
+    fun updateTaxiCheckIn(@PathVariable taxiId: Long): TaxiResponse {
+        val taxiResponse = taxiFacade.updateTaxiCheckIn(taxiId)
+        return TaxiResponse(
+            taxiId = taxiResponse.taxiId,
+            type = taxiResponse.type,
+            number = taxiResponse.number,
+            status = taxiResponse.status
+        )
+    }
 }

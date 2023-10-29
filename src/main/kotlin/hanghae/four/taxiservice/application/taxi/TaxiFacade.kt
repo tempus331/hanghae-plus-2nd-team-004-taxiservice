@@ -19,4 +19,8 @@ class TaxiFacade(
     fun updateTaxiWait(taxiId: Long): TaxiResult.TaxiResponse {
         return taxiService.updateTaxiWait(taxiId)
     }
+
+    fun updateTaxiCheckIn(taxiId: Long): TaxiResult.TaxiResponse {
+        return taxiService.updateTaxiCheckIn(taxiId)
+    }
 }
