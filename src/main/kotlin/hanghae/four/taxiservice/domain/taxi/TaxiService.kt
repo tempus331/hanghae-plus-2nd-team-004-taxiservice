@@ -25,12 +25,30 @@ class TaxiService(
     @Transactional
     fun updateTaxiWait(taxiId: Long): TaxiResult.TaxiResponse {
         val taxi = taxiReader.getTaxi(taxiId)
-        taxi.updateWaiting()
+        taxiStore.store(taxi.run { this.updateWaiting() })
+
         return TaxiResult.TaxiResponse(
             taxiId = requireNotNull(taxi.id),
             type = taxi.type,
             number = taxi.number,
             status = taxi.status
         )
+    }
+
+    @Transactional
+    fun updateTaxiCheckIn(taxiId: Long): TaxiResult.TaxiResponse {
+        val taxi = taxiReader.getTaxi(taxiId)
+        taxiStore.store(taxi.run { this.checkIn() })
+
+        return TaxiResult.TaxiResponse(
+            taxiId = requireNotNull(taxi.id),
+            type = taxi.type,
+            number = taxi.number,
+            status = taxi.status
+        )
+    }
+
+    fun runningComplete(taxi: Taxi) {
+        taxiStore.store(taxi.run { this.runningComplete() })
     }
 }

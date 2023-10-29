@@ -38,11 +38,18 @@ class Taxi(
         }
     }
 
-    fun updateWaiting() {
-        if (this.status != Status.CLOSED) {
-            throw IllegalArgumentException("'미운행'인 상태가 아닙니다. 상태를 확인해주세요.")
+    fun updateWaiting(): Taxi {
+        if (this.status != Status.CLOSED && this.status != Status.COMPLETE) {
+            throw IllegalArgumentException("'미운행' 또는 '완료'인 상태가 아닙니다. 상태를 확인해주세요.")
         }
-        this.status = Status.WAITING
+
+        return Taxi(
+            driverId = this.driverId,
+            type = this.type,
+            number = this.number,
+            status = Status.WAITING,
+            id = this.id
+        )
     }
 
     fun departToCustomer(): Taxi {
@@ -65,6 +72,20 @@ class Taxi(
             type = this.type,
             number = this.number,
             status = Status.COMPLETE,
+            id = this.id
+        )
+    }
+
+    fun checkIn(): Taxi {
+        if (this.status != Status.ON_WAY_TO_CUSTOMER) {
+            throw IllegalArgumentException("'고객에게 가는중'인 상태가 아닙니다. 상태를 확인해주세요.")
+        }
+
+        return Taxi(
+            driverId = this.driverId,
+            type = this.type,
+            number = this.number,
+            status = Status.RUNNING,
             id = this.id
         )
     }
