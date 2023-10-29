@@ -60,42 +60,9 @@ class PaymentServiceTest {
 
         every { payFactory.execute(PayInfo(1L, PayInfo.Type.CASH)) } just Runs
 
-        val payId = paymentService.pay(command, call, taxi)
+        val payId = paymentService.pay(command)
 
         assertThat(payId).isEqualTo(1L)
-    }
-
-    @Test
-    fun `결제시 호출된 택시가 "운행중"이 아니면 에러`() {
-        taxi = Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.WAITING)
-
-        call = Call(userId = 1L, taxiId = 2L, origin = "서울시 강남구", destination = "서울시 강북구")
-        call.accept()
-
-        val command = PaymentCommand(
-            clientId = 1L,
-            callId = 2L,
-            payInfoId = null,
-            amount = BigDecimal(1000),
-            payType = PayInfo.Type.CASH
-        )
-
-        Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
-            .isInstanceOf(java.lang.IllegalArgumentException::class.java)
-    }
-
-    @Test
-    fun `호출된 택시가 "RUNNING" 이 아니라면 에러`() {
-        val command = PaymentCommand(
-            clientId = 1L,
-            callId = 1L,
-            payInfoId = 1L,
-            amount = BigDecimal(1000),
-            payType = PayInfo.Type.SAMSUNGCARD
-        )
-
-        Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
-            .isInstanceOf(java.lang.IllegalStateException::class.java)
     }
 
     @Test
@@ -110,7 +77,7 @@ class PaymentServiceTest {
             payType = PayInfo.Type.SAMSUNGCARD
         )
 
-        Assertions.assertThatThrownBy { paymentService.pay(command, call, taxi) }
+        Assertions.assertThatThrownBy { paymentService.pay(command) }
             .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 
@@ -132,7 +99,7 @@ class PaymentServiceTest {
 
         every { payFactory.execute(any()) } just Runs
 
-        val payId = paymentService.pay(command, call, taxi)
+        val payId = paymentService.pay(command)
 
         assertThat(payId).isEqualTo(1L)
     }

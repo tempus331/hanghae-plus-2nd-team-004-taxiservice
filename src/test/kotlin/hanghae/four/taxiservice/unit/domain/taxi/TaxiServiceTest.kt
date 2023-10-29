@@ -6,6 +6,7 @@ import hanghae.four.taxiservice.domain.taxi.TaxiReader
 import hanghae.four.taxiservice.domain.taxi.TaxiService
 import hanghae.four.taxiservice.domain.taxi.TaxiStore
 import hanghae.four.taxiservice.unit.infrastructures.taxi.FakeTaxiRepository
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
@@ -43,5 +44,20 @@ internal class TaxiServiceTest {
         assertThatThrownBy { taxiService.register(request) }
             .isInstanceOf(EntityExistsException::class.java)
             .hasMessage("중복된 택시 번호가 있습니다.")
+    }
+
+    @Test
+    fun `택시 운행 완료`() {
+        val taxi = Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.RUNNING)
+
+        taxiService.runningComplete(taxi)
+    }
+
+    @Test
+    fun `호출된 택시가 "운행중"이 아니면 에러`() {
+        val taxi = Taxi(driverId = 2L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.WAITING)
+
+        Assertions.assertThatThrownBy { taxiService.runningComplete(taxi) }
+            .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 }

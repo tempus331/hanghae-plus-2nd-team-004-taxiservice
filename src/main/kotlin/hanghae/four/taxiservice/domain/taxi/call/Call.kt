@@ -49,12 +49,21 @@ class Call(
         this.status = CallStatus.RUNNING
     }
 
-    fun complete() {
+    fun complete(): Call {
         if (this.status != CallStatus.RUNNING) {
             throw IllegalStateException("호출 상태를 확인 해주세요~!")
         }
 
-        this.status = CallStatus.COMPLETE
+        return Call(
+            id = this.id,
+            userId = this.userId,
+            taxiId = this.taxiId,
+            callNumber = this.callNumber,
+            origin = this.origin,
+            destination = this.destination,
+            createdAt = this.createdAt,
+            status = CallStatus.COMPLETE
+        )
     }
 
     enum class CallStatus(

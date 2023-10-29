@@ -15,6 +15,7 @@ class CallService(
     val taxiFinder: TaxiFinder,
     val taxiAllocator: TaxiAllocator,
     val callReader: CallReader,
+    val callStore: CallStore,
     val fareCalculator: FareCalculator,
 ) {
 
@@ -42,6 +43,10 @@ class CallService(
     fun recover(): CallResult? {
         throw NotExistsCallableTaxiException()
         return null
+    }
+
+    fun complete(call: Call) {
+        callStore.store(call.run { this.complete() })
     }
 
     fun findCall(callId: Long): Call {

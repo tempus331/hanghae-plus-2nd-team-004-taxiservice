@@ -35,7 +35,7 @@ internal class CallServiceTest {
 
     @BeforeEach
     fun setUp() {
-        sut = CallService(taxiFinder, taxiAllocator, callRepository, fareCalculator)
+        sut = CallService(taxiFinder, taxiAllocator, callRepository, callRepository, fareCalculator)
     }
 
     @DisplayName("call 메서드는")

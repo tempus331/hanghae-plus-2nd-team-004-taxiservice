@@ -4,6 +4,8 @@ import hanghae.four.taxiservice.domain.pay.payinfo.PayInfo
 import java.math.BigDecimal
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -18,6 +20,7 @@ class Payment(
     @Column(name = "call_id", nullable = false)
     val callId: Long,
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     val type: PayInfo.Type,
 
