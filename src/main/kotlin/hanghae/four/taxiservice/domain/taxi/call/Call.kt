@@ -16,7 +16,7 @@ import javax.persistence.Table
  */
 
 @Entity
-@Table(name = "call")
+@Table(name = "calls")
 class Call(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
