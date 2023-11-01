@@ -9,4 +9,5 @@ fun CallRepository.getBy(id: Long) = findByIdOrNull(id) ?: throw CallNotFoundExc
 
 interface CallRepository : JpaRepository<Call, Long> {
     fun findByStatus(status: Call.CallStatus): List<Call>
+    fun findByCallNumber(callNumber: String): Call?
 }

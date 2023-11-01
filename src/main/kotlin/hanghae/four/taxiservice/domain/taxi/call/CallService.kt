@@ -49,8 +49,8 @@ class CallService(
         callStore.store(call.run { this.complete() })
     }
 
-    fun findCall(callId: Long): Call {
-        return callReader.findCall(callId)
+    fun findCall(callNumber: String): Call {
+        return callReader.findCall(callNumber)
     }
 
     fun getCallingClients(): CallingClients {

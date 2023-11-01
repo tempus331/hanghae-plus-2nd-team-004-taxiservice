@@ -15,10 +15,10 @@ class PaymentFacade(
     val paymentService: PaymentService,
 ) {
     fun pay(command: PaymentCommand): Long {
-        val call = callService.findCall(command.callId)
+        val call = callService.findCall(command.callNumber)
         val taxi = taxiService.findTaxi(call.taxiId)
 
-        val payId = paymentService.pay(command)
+        val payId = paymentService.pay(command, requireNotNull(call.id))
 
         callService.complete(call)
         taxiService.runningComplete(taxi)
