@@ -5,12 +5,12 @@ import java.math.BigDecimal
 
 data class PaymentCommand(
     val clientId: Long,
-    val callId: Long,
+    val callNumber: String,
     val payInfoId: Long?,
     val amount: BigDecimal,
     val payType: PayInfo.Type,
 ) {
-    fun toEntity(): Payment {
+    fun toEntity(callId: Long): Payment {
         return Payment(
             clientId = clientId,
             callId = callId,

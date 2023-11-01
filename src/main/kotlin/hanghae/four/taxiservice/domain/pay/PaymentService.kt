@@ -9,12 +9,12 @@ class PaymentService(
     val paymentStore: PaymentStore,
     val payFactory: PayFactory,
 ) {
-    fun pay(command: PaymentCommand): Long {
+    fun pay(command: PaymentCommand, callId: Long): Long {
         if (!command.payType.cashCheck()) {
             val payment = payInfoReader.getPayInfo(requireNotNull(command.payInfoId), command.payType)
             payFactory.execute(payment)
         }
 
-        return requireNotNull(paymentStore.store(command.toEntity()).id)
+        return requireNotNull(paymentStore.store(command.toEntity(callId)).id)
     }
 }
