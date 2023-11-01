@@ -10,7 +10,7 @@ data class PayRequest(
     val clientId: Long,
 
     @field: NotNull(message = "택시 호출 id를 입력해주세요.")
-    val callId: Long,
+    val callNumber: String,
 
     val payInfoId: Long?,
 
@@ -23,7 +23,7 @@ data class PayRequest(
     fun toPayCommand(): PaymentCommand {
         return PaymentCommand(
             clientId = clientId,
-            callId = callId,
+            callNumber = callNumber,
             payInfoId = payInfoId,
             amount = amount,
             payType = payType

@@ -29,6 +29,8 @@ class PaymentServiceTest {
     private lateinit var call: Call
     private lateinit var taxi: Taxi
 
+    private lateinit var callNumber: String
+
     @BeforeEach
     fun setup() {
         fakePayInfoRepository = FakePayInfoRepository()
@@ -44,6 +46,8 @@ class PaymentServiceTest {
 
         taxi = Taxi(driverId = 1L, type = Taxi.Type.NORMAL, number = 1234, status = Taxi.Status.RUNNING)
         call = Call(userId = 1L, taxiId = 1L, origin = "서울시 강남구", destination = "서울시 강북구")
+
+        callNumber = ""
     }
 
     @Test
@@ -52,7 +56,7 @@ class PaymentServiceTest {
 
         val command = PaymentCommand(
             clientId = 1L,
-            callId = 1L,
+            callNumber = "",
             payInfoId = null,
             amount = BigDecimal(1000),
             payType = PayInfo.Type.CASH
@@ -60,7 +64,7 @@ class PaymentServiceTest {
 
         every { payFactory.execute(PayInfo(1L, PayInfo.Type.CASH)) } just Runs
 
-        val payId = paymentService.pay(command)
+        val payId = paymentService.pay(command, 1L)
 
         assertThat(payId).isEqualTo(1L)
     }
@@ -71,13 +75,13 @@ class PaymentServiceTest {
 
         val command = PaymentCommand(
             clientId = 1L,
-            callId = 1L,
+            callNumber = "",
             payInfoId = 1L,
             amount = BigDecimal(1000),
             payType = PayInfo.Type.SAMSUNGCARD
         )
 
-        Assertions.assertThatThrownBy { paymentService.pay(command) }
+        Assertions.assertThatThrownBy { paymentService.pay(command, 1L) }
             .isInstanceOf(java.lang.IllegalArgumentException::class.java)
     }
 
@@ -91,7 +95,7 @@ class PaymentServiceTest {
 
         val command = PaymentCommand(
             clientId = 1L,
-            callId = 1L,
+            callNumber = "",
             payInfoId = 1L,
             amount = BigDecimal(1000),
             payType = PayInfo.Type.SAMSUNGCARD
@@ -99,7 +103,7 @@ class PaymentServiceTest {
 
         every { payFactory.execute(any()) } just Runs
 
-        val payId = paymentService.pay(command)
+        val payId = paymentService.pay(command, 1L)
 
         assertThat(payId).isEqualTo(1L)
     }
